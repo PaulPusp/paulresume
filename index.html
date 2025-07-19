@@ -22,10 +22,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for social icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(to bottom right, #e0f7fa, #c2e9fb); /* Lighter, more vibrant blue gradient */
+            /* Layer 1: Subtle clipart pattern (very light dots) */
+            background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px),
+                              /* Layer 2: Transparent color overlay (40% opaque to show 60% image) */
+                              linear-gradient(to bottom right, rgba(224, 247, 250, 0.4), rgba(194, 233, 251, 0.4)),
+                              /* Layer 3: Satellite image */
+                              url('https://s7d1.scene7.com/is/image/wbcollab/shutterstock_1769294429_2?qlt=90&fmt=webp&resMode=sharp2');
+            
+            background-size: 20px 20px, cover, cover; /* Sizes for each layer */
+            background-position: center center, center center, center center;
+            background-repeat: repeat, no-repeat, no-repeat;
+            background-attachment: fixed, fixed, fixed; /* All fixed for parallax-like effect */
             color: #1a202c; /* Darker text for contrast */
         }
         .timeline-item {
@@ -210,7 +222,7 @@
         </div>
     </div>
 
-    <main class="container mx-auto px-6 py-12">
+    <main class="container mx-auto px-6 py-12 bg-white rounded-3xl shadow-xl">
 
         <!-- About Section -->
         <section id="about" class="mb-24 text-center">
@@ -224,7 +236,7 @@
                     <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6M20 6L12 11L4 6H20M20 18H4V8L12 13L20 8V18Z" /></svg>
                 </a>
                 <a href="https://www.linkedin.com/in/puspendubiswaspaul" target="_blank" class="text-cyan-600 hover:text-cyan-700 transition duration-300">
-                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 6 8.34 6.88 8.56M8.27 18.5V10.13H5.53V18.5H8.27Z" /></svg>
+                    <i class="fab fa-linkedin fa-2x"></i> <!-- Font Awesome LinkedIn icon -->
                 </a>
             </div>
         </section>
@@ -506,6 +518,7 @@
                 { title: 'Remote sensing based impact assessment of 2024 Monsoon flood in the South-east Bangladesh', category: 'Under Review' },
                 { title: 'Spatio-Temporal Dynamics and Machine Learning-Based Hotspot Classification of Artificial Light at Night in Nigeria (2014-2024): An AI assisted Geospatial Analysis.', category: 'Ongoing' },
                 { title: 'Spatio-Temporal Dynamics and Machine Learning-Based Hotspot Classification of Artificial Light at Night in Bangladesh (2014-2024): An AI assisted Geospatial Analysis.', category: 'Ongoing' },
+                { title: 'SAR-Driven Flood Mapping and Impact: Assessing the August 2024 Monsoon Disaster', category: 'Submitted' },
                 { title: 'Lunar Orbit design for Sustainable Cislunar Applications', category: 'Ongoing' },
                 { title: 'Evaluating the socio-economic conditions of fishers and sustainability of small-scale fisheries in the Kalni River, Bangladesh', category: 'Published' },
                 { title: 'Data-Driven Decision Making for Smart Cultivation', category: 'Published' },
