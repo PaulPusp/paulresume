@@ -4,16 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Puspendu Biswas Paul - Interactive CV</title>
-    <!-- Chosen Palette: Professional Teal -->
-    <!-- Application Structure Plan: A single-page application with a fixed navigation bar for smooth scrolling. The structure is designed for intuitive exploration: Hero section for a strong first impression, followed by thematic sections for Skills (visual cards), a unified Experience/Education Timeline, filterable Publications, and consolidated Achievements. This user-centric design prioritizes scannability and interaction over a rigid, linear document format, allowing recruiters and academics to quickly access the most relevant information. A new "Volunteering" section has been added to distinguish pro-bono work from core professional experience. -->
+    <!-- Chosen Palette: Soft Gradient Harmony -->
+    <!-- Application Structure Plan: A single-page application with a floating "water drop" menu for navigation. The structure includes a prominent Hero section, visually distinct Skills cards, an interactive Experience/Education Timeline, a dedicated Volunteering section, filterable Publications, and color-coded Achievements. This design prioritizes a clean, modern aesthetic and intuitive, animated user interactions, allowing for quick consumption and exploration of content. -->
     <!-- Visualization & Content Choices: 
-        - Summary: Presented in a prominent hero section for immediate impact. Goal: Inform. Method: Styled text.
-        - Skills: Grouped into categories and displayed as visually distinct cards. Goal: Organize/Inform. Method: HTML/Tailwind CSS Grid. Justification: Enhances readability and visual appeal over a simple list.
+        - Summary: Prominent hero section with large name and profile picture. Goal: Inform. Method: Styled text and images.
+        - Skills: Grouped into categories and displayed as visually distinct cards with hover effects. Goal: Organize/Inform. Method: HTML/Tailwind CSS Grid. Justification: Enhances readability and visual appeal.
         - IELTS Score: Visualized with a Radar chart. Goal: Compare/Inform. Method: Chart.js on Canvas. Justification: Provides a quick, comparative view of language proficiencies.
-        - Experience & Education: Combined into a single, interactive vertical timeline. Goal: Show Change/Progression. Method: HTML/Tailwind with JS for toggleable details. Justification: Creates a cohesive narrative of the professional journey.
-        - Volunteering: A new dedicated section for voluntary work. Goal: Inform. Method: HTML/Tailwind cards. Justification: Clearly separates voluntary contributions from paid professional roles.
-        - Publications: Displayed as a filterable list. Goal: Organize/Interact. Method: HTML/Tailwind cards with JS filtering. Justification: Manages a long list effectively, allowing users to focus on specific publication statuses (e.g., 'Under Review').
-        - Achievements/Awards: Presented in a clean grid layout with distinct colors for academic and activity-based achievements. Goal: Inform. Method: HTML/Tailwind cards with conditional styling. Justification: Improves visual distinction and highlights different facets of accomplishments.
+        - Experience & Education: Combined into a single, interactive vertical timeline with expandable details. Goal: Show Change/Progression. Method: HTML/Tailwind with JS for toggleable details and subtle hover animations. Justification: Creates a cohesive narrative of the professional journey.
+        - Volunteering: Dedicated section with cards for voluntary work. Goal: Inform. Method: HTML/Tailwind cards with hover effects. Justification: Clearly separates voluntary contributions from paid professional roles.
+        - Publications: Filterable list of publications. Goal: Organize/Interact. Method: HTML/Tailwind cards with JS filtering and hover effects. Justification: Manages a long list effectively, allowing users to focus on specific publication statuses.
+        - Achievements/Awards: Presented in a clean grid layout with distinct background colors for academic and activity-based achievements, enhanced with hover effects. Goal: Inform. Method: HTML/Tailwind cards with conditional styling. Justification: Improves visual distinction and highlights different facets of accomplishments.
+        - Navigation: Floating "water drop" menu triggered by a hamburger icon. Goal: Navigate. Method: HTML/Tailwind for menu structure, JS for animation and toggle. Justification: Provides a modern, clean, and interactive navigation experience.
     -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -24,7 +25,7 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f0fdfa; /* Lighter teal background */
+            background: linear-gradient(to bottom right, #f0f9ff, #e0f2f7); /* Soft gradient background */
             color: #1e293b;
         }
         .timeline-item {
@@ -109,6 +110,72 @@
             background-color: #f0f9ff; /* Light blue on hover for inactive */
             border-color: #67e8f9; /* Cyan border on hover */
         }
+
+        /* iOS Water Drop Menu Styles */
+        .water-drop-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
+            backdrop-filter: blur(20px); /* Frosted glass effect */
+            -webkit-backdrop-filter: blur(20px); /* For Safari */
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease-out, visibility 0.4s ease-out;
+        }
+        .water-drop-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .water-drop-menu {
+            background-color: rgba(255, 255, 255, 0.8); /* Slightly less transparent */
+            border-radius: 2.5rem; /* More rounded */
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transform: scale(0.8) translateY(50px);
+            opacity: 0;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease-out; /* Bouncy animation */
+            max-width: 90%;
+            width: 400px;
+            text-align: center;
+        }
+        .water-drop-menu-overlay.active .water-drop-menu {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+        .water-drop-menu a {
+            display: block;
+            padding: 0.75rem 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1e293b;
+            border-radius: 0.75rem;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        .water-drop-menu a:hover {
+            background-color: #e0f2f7; /* Light teal hover */
+            color: #0d9488;
+        }
+        .close-menu-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: #475569;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        .close-menu-btn:hover {
+            transform: rotate(90deg);
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -117,39 +184,36 @@
     <header id="header" class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="text-2xl font-bold text-teal-700 flex items-center gap-2">
-                <img src="https://scholar.googleusercontent.com/citations?view_op=medium_photo&user=L8kjjy8AAAAJ&citpid=1" alt="Logo" class="h-8 w-8 rounded-full"> <!-- Replace with your logo URL -->
+                <img src="https://media.licdn.com/dms/image/v2/D5603AQF8CqLTT-6mLg/profile-displayphoto-crop_800_800/B56ZfDuE0KHUAM-/0/1751335327095?e=1755734400&v=beta&t=Qxs9306sKOckx3jhMPsnzPuRkNuIvSftD9v54RVonV4" alt="Logo" class="h-8 w-8 rounded-full"> <!-- Replace with your logo URL -->
                 Puspendu Biswas Paul
             </a>
-            <div class="hidden md:flex space-x-6">
-                <a href="#about" class="nav-link text-gray-600 hover:text-teal-600 transition duration-300">About</a>
-                <a href="#skills" class="nav-link text-gray-600 hover:text-teal-600 transition duration-300">Skills</a>
-                <a href="#journey" class="nav-link text-gray-600 hover:text-teal-600 transition duration-300">Journey</a>
-                <a href="#volunteering" class="nav-link text-gray-600 hover:text-teal-600 transition duration-300">Volunteering</a>
-                <a href="#publications" class="nav-link text-gray-600 hover:text-teal-600 transition duration-300">Publications</a>
-                <a href="#achievements" class="nav-link text-gray-600 hover:text-teal-600 transition duration-300">Achievements</a>
-                <a href="#contact" class="nav-link text-gray-600 hover:text-teal-600 transition duration-300">Contact</a>
-            </div>
-            <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            <button id="mobile-menu-button" class="text-gray-700 focus:outline-none p-2 rounded-full hover:bg-gray-100 transition duration-200">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
             </button>
         </nav>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
-            <a href="#about" class="nav-link block py-2 text-gray-600 hover:text-teal-600">About</a>
-            <a href="#skills" class="nav-link block py-2 text-gray-600 hover:text-teal-600">Skills</a>
-            <a href="#journey" class="nav-link block py-2 text-gray-600 hover:text-teal-600">Journey</a>
-            <a href="#volunteering" class="nav-link block py-2 text-gray-600 hover:text-teal-600">Volunteering</a>
-            <a href="#publications" class="nav-link block py-2 text-gray-600 hover:text-teal-600">Publications</a>
-            <a href="#achievements" class="nav-link block py-2 text-gray-600 hover:text-teal-600">Achievements</a>
-            <a href="#contact" class="nav-link block py-2 text-gray-600 hover:text-teal-600">Contact</a>
-        </div>
     </header>
+
+    <!-- Water Drop Menu Overlay -->
+    <div id="water-drop-menu-overlay" class="water-drop-menu-overlay">
+        <div class="water-drop-menu">
+            <button id="close-menu-btn" class="close-menu-btn">&times;</button>
+            <nav class="flex flex-col gap-2">
+                <a href="#about" class="menu-link">About</a>
+                <a href="#skills" class="menu-link">Skills</a>
+                <a href="#journey" class="menu-link">Journey</a>
+                <a href="#volunteering" class="menu-link">Volunteering</a>
+                <a href="#publications" class="menu-link">Publications</a>
+                <a href="#achievements" class="menu-link">Achievements</a>
+                <a href="#contact" class="menu-link">Contact</a>
+            </nav>
+        </div>
+    </div>
 
     <main class="container mx-auto px-6 py-12">
 
         <!-- About Section -->
         <section id="about" class="mb-24 text-center">
-            <img src="https://scontent-hkg1-2.xx.fbcdn.net/v/t39.30808-6/493334436_626215743752314_4712431554108028776_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=h-XpZfPF7s4Q7kNvwGwpZ_z&_nc_oc=AdnNFT4ivDOQJ9GSa_G_LGeRlbiCH8lq-4BlbR7CwbNPvXehlP4EmJPoC9kY3JRaz4w&_nc_zt=23&_nc_ht=scontent-hkg1-2.xx&_nc_gid=PxDIbNj-qWiB3Xk3OAJldg&oh=00_AfTeQNvY7BgcQZqCgYR3HF4yGQeSc_yi-qen89DoZw0vcw&oe=6880F736" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover shadow-lg border-4 border-teal-200"> <!-- Replace with your profile picture URL -->
+            <img src="https://scontent-hkg1-2.xx.fbcdn.net/v/t39.30808-6/493334436_626215743752314_4712431554108028776_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=h-XpZfPF7s4Q7kNvwGwpZ_z&_nc_oc=AdnNFT4ivDOQJ9GSa_G_LGeRlbiCH8lq-4BlbR7CwbNPvXehlP4EmJPoC9kY3JRaz4w&_nc_zt=23&_nc_ht=scontent-hkg1-2.xx&_nc_gid=PxDIbNj-qWiB3Xk3OAJldg&oh=00_AfTeQNvY7BgcQZqCgYR3HF4yGQeSc_yi-qen89DoZw0vcw&oe=6880F736" alt="Puspendu Biswas Paul Profile Picture" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover shadow-lg border-4 border-teal-200"> <!-- Replace with your profile picture URL -->
             <h1 class="text-5xl md:text-6xl font-extrabold text-slate-800 mb-2 leading-tight">Puspendu Biswas Paul</h1>
             <p class="max-w-4xl mx-auto text-lg text-slate-600">
                 A highly motivated and dedicated professional with a strong background in Synthetic Aperture Radar (SAR) data, Artificial Intelligence (AI), and remote sensing. Committed to leveraging advanced technologies to address complex geospatial challenges. Expertise includes developing AI-driven models for SAR data analysis, enabling enhanced environmental monitoring and disaster management.
@@ -310,14 +374,28 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Mobile Menu Toggle
             const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
+            const waterDropMenuOverlay = document.getElementById('water-drop-menu-overlay');
+            const closeMenuBtn = document.getElementById('close-menu-btn');
+            const menuLinks = document.querySelectorAll('.menu-link');
+
             mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
+                waterDropMenuOverlay.classList.add('active');
             });
 
-            // Active Nav Link Styling on Scroll
+            closeMenuBtn.addEventListener('click', () => {
+                waterDropMenuOverlay.classList.remove('active');
+            });
+
+            menuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    waterDropMenuOverlay.classList.remove('active'); // Close menu on link click
+                });
+            });
+
+
+            // Active Nav Link Styling on Scroll (for desktop if re-enabled, or just for conceptual understanding)
             const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('.nav-link');
+            const navLinks = document.querySelectorAll('.nav-link'); // These are now only in the mobile menu
 
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -326,6 +404,13 @@
                             link.classList.remove('active');
                             if (link.getAttribute('href').substring(1) === entry.target.id) {
                                 link.classList.add('active');
+                            }
+                        });
+                        // Also update active state for water drop menu links
+                        menuLinks.forEach(link => {
+                            link.classList.remove('text-teal-600', 'font-bold');
+                            if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                link.classList.add('text-teal-600', 'font-bold');
                             }
                         });
                     }
@@ -347,7 +432,7 @@
             const journeyContainer = document.querySelector('#journey .relative');
             journeyData.forEach(item => {
                 const timelineItem = document.createElement('div');
-                timelineItem.className = 'timeline-item mb-8 pl-8 cursor-pointer';
+                timelineItem.className = 'timeline-item bg-white p-6 rounded-lg shadow-md cursor-pointer';
                 timelineItem.innerHTML = `
                     <p class="text-sm text-slate-500">${item.date}</p>
                     <h3 class="font-bold text-xl text-slate-700">${item.title}</h3>
@@ -440,9 +525,9 @@
             const achievementsContainer = document.querySelector('#achievements .grid');
             achievementsData.forEach(item => {
                 const card = document.createElement('div');
-                card.className = `p-6 rounded-lg shadow-md card-hover-effect ${item.type === 'academic' ? 'bg-blue-50' : 'bg-purple-50'}`;
+                card.className = `p-6 rounded-lg shadow-md card-hover-effect ${item.type === 'academic' ? 'bg-indigo-50 text-indigo-800' : 'bg-pink-50 text-pink-800'}`; /* Updated colors */
                 card.innerHTML = `
-                    <h3 class="font-bold text-lg ${item.type === 'academic' ? 'text-blue-800' : 'text-purple-800'} mb-2">${item.title}</h3>
+                    <h3 class="font-bold text-lg mb-2">${item.title}</h3>
                     <p class="text-slate-600">${item.description}</p>
                 `;
                 achievementsContainer.appendChild(card);
