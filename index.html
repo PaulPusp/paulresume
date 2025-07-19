@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Puspendu Biswas Paul - Interactive CV</title>
-    <!-- Chosen Palette: Soft Gradient Harmony -->
-    <!-- Application Structure Plan: A single-page application with a floating "water drop" menu for navigation. The structure includes a prominent Hero section, visually distinct Skills cards, an interactive Experience/Education Timeline, a dedicated Volunteering section, filterable Publications, and color-coded Achievements. This design prioritizes a clean, modern aesthetic and intuitive, animated user interactions, allowing for quick consumption and exploration of content. -->
+    <!-- Chosen Palette: Dynamic Ocean Sunset -->
+    <!-- Application Structure Plan: A single-page application with a floating "water drop" menu for navigation. The structure includes a prominent Hero section, visually distinct Skills cards, an interactive Experience/Education Timeline, a dedicated Volunteering section, filterable Publications, and color-coded Achievements. This design prioritizes a clean, modern aesthetic and intuitive, animated user interactions, allowing for quick consumption and exploration of content. A new "Volunteering" section has been added to distinguish pro-bono work from core professional experience. -->
     <!-- Visualization & Content Choices: 
         - Summary: Prominent hero section with large name and profile picture. Goal: Inform. Method: Styled text and images.
         - Skills: Grouped into categories and displayed as visually distinct cards with hover effects. Goal: Organize/Inform. Method: HTML/Tailwind CSS Grid. Justification: Enhances readability and visual appeal.
@@ -17,16 +17,16 @@
         - Navigation: Floating "water drop" menu triggered by a hamburger icon. Goal: Navigate. Method: HTML/Tailwind for menu structure, JS for animation and toggle. Justification: Provides a modern, clean, and interactive navigation experience.
     -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(to bottom right, #f0f9ff, #e0f2f7); /* Soft gradient background */
-            color: #1e293b;
+            background: linear-gradient(to bottom right, #e0f7fa, #c2e9fb); /* Lighter, more vibrant blue gradient */
+            color: #1a202c; /* Darker text for contrast */
         }
         .timeline-item {
             position: relative;
@@ -36,7 +36,7 @@
         }
         .timeline-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
         }
         .timeline-item::before {
             content: '';
@@ -46,15 +46,15 @@
             border-radius: 50%;
             left: -0.625rem; /* Center the larger circle */
             top: 0.5rem; /* Adjust position */
-            background-color: #0d9488;
-            border: 4px solid #f0fdfa; /* Thicker border */
+            background-color: #00bcd4; /* Cyan accent */
+            border: 4px solid #ffffff; /* White border for pop */
             z-index: 1;
         }
         .timeline-item::after {
             content: '';
             position: absolute;
             width: 2px;
-            background-color: #a7f3d0; /* Lighter line color */
+            background-color: #80deea; /* Lighter cyan line */
             top: 1.25rem; /* Start below the circle */
             bottom: -1rem; /* Extend below the item */
             left: 0;
@@ -63,16 +63,16 @@
             display: none; /* Hide line for the last item */
         }
         .nav-link.active {
-            color: #0d9488;
+            color: #00bcd4; /* Cyan active link */
             font-weight: 700;
-            border-bottom: 2px solid #0d9488;
+            border-bottom: 2px solid #00bcd4;
             padding-bottom: 0.25rem;
         }
         .download-fab {
             position: fixed;
             bottom: 1.5rem;
             right: 1.5rem;
-            background-color: #0d9488;
+            background-color: #00bcd4; /* Cyan FAB */
             color: white;
             padding: 1rem 1.5rem;
             border-radius: 9999px;
@@ -85,7 +85,7 @@
             z-index: 1000;
         }
         .download-fab:hover {
-            background-color: #0f766e;
+            background-color: #00acc1; /* Darker cyan on hover */
             transform: translateY(-5px) scale(1.05);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
@@ -94,21 +94,21 @@
         }
         .card-hover-effect:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
         }
         .filter-btn {
             transition: all 0.2s ease-in-out;
-            border: 1px solid #d1d5db; /* Default border */
+            border: 1px solid #cbd5e0; /* Lighter gray border */
         }
         .filter-btn.active-filter {
-            background-color: #0d9488;
+            background-color: #00bcd4; /* Cyan active filter */
             color: white;
-            border-color: #0d9488;
+            border-color: #00bcd4;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         .filter-btn:not(.active-filter):hover {
-            background-color: #f0f9ff; /* Light blue on hover for inactive */
-            border-color: #67e8f9; /* Cyan border on hover */
+            background-color: #e0f7fa; /* Very light blue on hover for inactive */
+            border-color: #4dd0e1; /* Lighter cyan border on hover */
         }
 
         /* iOS Water Drop Menu Styles */
@@ -118,9 +118,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
-            backdrop-filter: blur(20px); /* Frosted glass effect */
-            -webkit-backdrop-filter: blur(20px); /* For Safari */
+            background-color: rgba(255, 255, 255, 0.6); /* Slightly more opaque white */
+            backdrop-filter: blur(25px); /* Stronger blur */
+            -webkit-backdrop-filter: blur(25px); /* For Safari */
             z-index: 1000;
             display: flex;
             justify-content: center;
@@ -134,15 +134,15 @@
             visibility: visible;
         }
         .water-drop-menu {
-            background-color: rgba(255, 255, 255, 0.8); /* Slightly less transparent */
-            border-radius: 2.5rem; /* More rounded */
-            padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            transform: scale(0.8) translateY(50px);
+            background-color: rgba(255, 255, 255, 0.9); /* Even less transparent */
+            border-radius: 3rem; /* Even more rounded */
+            padding: 2.5rem; /* More padding */
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            transform: scale(0.7) translateY(70px); /* Slightly more dramatic animation */
             opacity: 0;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease-out; /* Bouncy animation */
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s ease-out; /* Slower, more bouncy animation */
             max-width: 90%;
-            width: 400px;
+            width: 450px; /* Slightly wider */
             text-align: center;
         }
         .water-drop-menu-overlay.active .water-drop-menu {
@@ -151,30 +151,30 @@
         }
         .water-drop-menu a {
             display: block;
-            padding: 0.75rem 0;
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #1e293b;
-            border-radius: 0.75rem;
+            padding: 0.85rem 0; /* More padding */
+            font-size: 1.35rem; /* Larger font */
+            font-weight: 700; /* Bolder font */
+            color: #263238; /* Darker text */
+            border-radius: 1rem; /* More rounded links */
             transition: background-color 0.2s ease, color 0.2s ease;
         }
         .water-drop-menu a:hover {
-            background-color: #e0f2f7; /* Light teal hover */
-            color: #0d9488;
+            background-color: #e0f7fa; /* Light blue hover */
+            color: #00bcd4; /* Cyan hover text */
         }
         .close-menu-btn {
             position: absolute;
-            top: 1rem;
-            right: 1rem;
+            top: 1.25rem; /* Adjusted position */
+            right: 1.25rem; /* Adjusted position */
             background: none;
             border: none;
-            font-size: 2rem;
-            color: #475569;
+            font-size: 2.2rem; /* Larger icon */
+            color: #607d8b; /* Muted gray for close */
             cursor: pointer;
             transition: transform 0.2s ease;
         }
         .close-menu-btn:hover {
-            transform: rotate(90deg);
+            transform: rotate(90deg) scale(1.1); /* Slightly larger on hover */
         }
     </style>
 </head>
@@ -183,8 +183,8 @@
     <!-- Header & Navigation -->
     <header id="header" class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-teal-700 flex items-center gap-2">
-                <img src="https://media.licdn.com/dms/image/v2/D5603AQF8CqLTT-6mLg/profile-displayphoto-crop_800_800/B56ZfDuE0KHUAM-/0/1751335327095?e=1755734400&v=beta&t=Qxs9306sKOckx3jhMPsnzPuRkNuIvSftD9v54RVonV4" alt="Logo" class="h-8 w-8 rounded-full"> <!-- Replace with your logo URL -->
+            <a href="#" class="text-2xl font-bold text-gray-800 flex items-center gap-2">
+                <img src="https://media.licdn.com/dms/image/v2/D5603AQF8CqLTT-6mLg/profile-displayphoto-crop_800_800/B56ZfDuE0KHUAM-/0/1751335327095?e=1755734400&v=beta&t=Qxs9306sKOckx3jhMPsnzPuRkNuIvSftD9v54RVonV4" alt="Logo" class="h-8 w-8 rounded-full shadow-sm"> <!-- Replace with your logo URL -->
                 Puspendu Biswas Paul
             </a>
             <button id="mobile-menu-button" class="text-gray-700 focus:outline-none p-2 rounded-full hover:bg-gray-100 transition duration-200">
@@ -202,6 +202,7 @@
                 <a href="#skills" class="menu-link">Skills</a>
                 <a href="#journey" class="menu-link">Journey</a>
                 <a href="#volunteering" class="menu-link">Volunteering</a>
+                <a href="#conferences" class="menu-link">Conferences</a>
                 <a href="#publications" class="menu-link">Publications</a>
                 <a href="#achievements" class="menu-link">Achievements</a>
                 <a href="#contact" class="menu-link">Contact</a>
@@ -213,72 +214,72 @@
 
         <!-- About Section -->
         <section id="about" class="mb-24 text-center">
-            <img src="https://scontent-hkg1-2.xx.fbcdn.net/v/t39.30808-6/493334436_626215743752314_4712431554108028776_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=h-XpZfPF7s4Q7kNvwGwpZ_z&_nc_oc=AdnNFT4ivDOQJ9GSa_G_LGeRlbiCH8lq-4BlbR7CwbNPvXehlP4EmJPoC9kY3JRaz4w&_nc_zt=23&_nc_ht=scontent-hkg1-2.xx&_nc_gid=PxDIbNj-qWiB3Xk3OAJldg&oh=00_AfTeQNvY7BgcQZqCgYR3HF4yGQeSc_yi-qen89DoZw0vcw&oe=6880F736" alt="Puspendu Biswas Paul Profile Picture" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover shadow-lg border-4 border-teal-200"> <!-- Replace with your profile picture URL -->
-            <h1 class="text-5xl md:text-6xl font-extrabold text-slate-800 mb-2 leading-tight">Puspendu Biswas Paul</h1>
-            <p class="max-w-4xl mx-auto text-lg text-slate-600">
+            <img src="https://scontent-hkg1-2.xx.fbcdn.net/v/t39.30808-6/493334436_626215743752314_4712431554108028776_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=h-XpZfPF7s4Q7kNvwGwpZ_z&_nc_oc=AdnNFT4ivDOQJ9GSa_G_LGeRlbiCH8lq-4BlbR7CwbNPvXehlP4EmJPoC9kY3JRaz4w&_nc_zt=23&_nc_ht=scontent-hkg1-2.xx&_nc_gid=PxDIbNj-qWiB3Xk3OAJldg&oh=00_AfTeQNvY7BgcQZqCgYR3HF4yGQeSc_yi-qen89DoZw0vcw&oe=6880F736" alt="Puspendu Biswas Paul Profile Picture" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover shadow-xl border-4 border-cyan-300"> <!-- Replace with your profile picture URL -->
+            <h1 class="text-5xl md:text-6xl font-extrabold text-gray-800 mb-2 leading-tight">Puspendu Biswas Paul</h1>
+            <p class="max-w-4xl mx-auto text-lg text-gray-700">
                 A highly motivated and dedicated professional with a strong background in Synthetic Aperture Radar (SAR) data, Artificial Intelligence (AI), and remote sensing. Committed to leveraging advanced technologies to address complex geospatial challenges. Expertise includes developing AI-driven models for SAR data analysis, enabling enhanced environmental monitoring and disaster management.
             </p>
             <div class="mt-6 flex justify-center space-x-4">
-                <a href="mailto:puspendu.buaa@gmail.com" class="text-teal-600 hover:text-teal-700 transition duration-300">
+                <a href="mailto:puspendu.buaa@gmail.com" class="text-cyan-600 hover:text-cyan-700 transition duration-300">
                     <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6M20 6L12 11L4 6H20M20 18H4V8L12 13L20 8V18Z" /></svg>
                 </a>
-                <a href="https://www.linkedin.com/in/puspendubiswaspaul" target="_blank" class="text-teal-600 hover:text-teal-700 transition duration-300">
-                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 6 8 5.44 7.21 5.44A1.68 1.68 0 0 0 5.53 6.88C5.53 7.77 6 8.34 6.88 8.56M8.27 18.5V10.13H5.53V18.5H8.27Z" /></svg>
+                <a href="https://www.linkedin.com/in/puspendubiswaspaul" target="_blank" class="text-cyan-600 hover:text-cyan-700 transition duration-300">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 6 8.34 6.88 8.56M8.27 18.5V10.13H5.53V18.5H8.27Z" /></svg>
                 </a>
             </div>
         </section>
 
         <!-- Skills Section -->
         <section id="skills" class="mb-24">
-            <h2 class="text-3xl font-bold text-center mb-2 text-slate-800">Technical Skills</h2>
-            <p class="text-lg text-slate-600 text-center mb-12">This section provides an overview of the key technical competencies, from programming languages and specialized software to data analysis and AI frameworks, that form the foundation of my professional expertise.</p>
+            <h2 class="text-3xl font-bold text-center mb-2 text-gray-800">Technical Skills</h2>
+            <p class="text-lg text-gray-700 text-center mb-12">This section provides an overview of the key technical competencies, from programming languages and specialized software to data analysis and AI frameworks, that form the foundation of my professional expertise.</p>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Skill Card -->
-                <div class="bg-white p-6 rounded-lg shadow-md card-hover-effect">
-                    <h3 class="font-bold text-xl mb-3 text-teal-700">Languages & Databases</h3>
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover-effect border border-blue-200">
+                    <h3 class="font-bold text-xl mb-3 text-blue-700">Languages & Databases</h3>
                     <div class="flex flex-wrap gap-2">
-                        <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">Python</span>
-                        <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">JavaScript</span>
-                        <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">C/C++ (Arduino)</span>
-                        <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">MySQL</span>
+                        <span class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">Python</span>
+                        <span class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">JavaScript</span>
+                        <span class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">C/C++ (Arduino)</span>
+                        <span class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">MySQL</span>
                     </div>
                 </div>
                  <!-- Skill Card -->
-                <div class="bg-white p-6 rounded-lg shadow-md card-hover-effect">
-                    <h3 class="font-bold text-xl mb-3 text-teal-700">Data Analysis & AI</h3>
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover-effect border border-purple-200">
+                    <h3 class="font-bold text-xl mb-3 text-purple-700">Data Analysis & AI</h3>
                      <div class="flex flex-wrap gap-2">
-                        <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">Deep Learning</span>
-                        <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">Using AI efficiently</span>
-                        <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">Investigative Research</span>
-                        <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">Scientific Writing</span>
-                        <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">Statistical Analysis</span>
+                        <span class="bg-purple-100 text-purple-800 text-sm font-medium px-3 py-1 rounded-full">Deep Learning</span>
+                        <span class="bg-purple-100 text-purple-800 text-sm font-medium px-3 py-1 rounded-full">Using AI efficiently</span>
+                        <span class="bg-purple-100 text-purple-800 text-sm font-medium px-3 py-1 rounded-full">Investigative Research</span>
+                        <span class="bg-purple-100 text-purple-800 text-sm font-medium px-3 py-1 rounded-full">Scientific Writing</span>
+                        <span class="bg-purple-100 text-purple-800 text-sm font-medium px-3 py-1 rounded-full">Statistical Analysis</span>
                     </div>
                 </div>
                  <!-- Skill Card -->
-                <div class="bg-white p-6 rounded-lg shadow-md card-hover-effect">
-                    <h3 class="font-bold text-xl mb-3 text-teal-700">Remote Sensing & GIS</h3>
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover-effect border border-green-200">
+                    <h3 class="font-bold text-xl mb-3 text-green-700">Remote Sensing & GIS</h3>
                      <div class="flex flex-wrap gap-2">
-                        <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">ArcGIS Pro</span>
-                        <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">Google Earth Engine</span>
-                        <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">SNAP</span>
+                        <span class="bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full">ArcGIS Pro</span>
+                        <span class="bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full">Google Earth Engine</span>
+                        <span class="bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full">SNAP</span>
                     </div>
                 </div>
                  <!-- Skill Card -->
-                <div class="bg-white p-6 rounded-lg shadow-md card-hover-effect">
-                    <h3 class="font-bold text-xl mb-3 text-teal-700">Satellite & Engineering</h3>
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover-effect border border-orange-200">
+                    <h3 class="font-bold text-xl mb-3 text-orange-700">Satellite & Engineering</h3>
                      <div class="flex flex-wrap gap-2">
-                        <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">SAR</span>
-                        <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">GNSS-R</span>
-                        <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">Weather Satellite Data</span>
-                        <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">Use of Chinese satellite systems</span>
-                        <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">SolidWorks</span>
-                        <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">AutoCAD 2D</span>
+                        <span class="bg-orange-100 text-orange-800 text-sm font-medium px-3 py-1 rounded-full">SAR</span>
+                        <span class="bg-orange-100 text-orange-800 text-sm font-medium px-3 py-1 rounded-full">GNSS-R</span>
+                        <span class="bg-orange-100 text-orange-800 text-sm font-medium px-3 py-1 rounded-full">Weather Satellite Data</span>
+                        <span class="bg-orange-100 text-orange-800 text-sm font-medium px-3 py-1 rounded-full">Use of Chinese satellite systems</span>
+                        <span class="bg-orange-100 text-orange-800 text-sm font-medium px-3 py-1 rounded-full">SolidWorks</span>
+                        <span class="bg-orange-100 text-orange-800 text-sm font-medium px-3 py-1 rounded-full">AutoCAD 2D</span>
                     </div>
                 </div>
                  <!-- Skill Card -->
-                <div class="bg-white p-6 rounded-lg shadow-md card-hover-effect">
-                    <h3 class="font-bold text-xl mb-3 text-teal-700">Certifications</h3>
-                    <ul class="list-disc list-inside text-slate-600">
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover-effect border border-pink-200">
+                    <h3 class="font-bold text-xl mb-3 text-pink-700">Certifications</h3>
+                    <ul class="list-disc list-inside text-gray-700">
                         <li>Data Visualization using Bokeh</li>
                         <li>Introduction to GIS Mapping</li>
                         <li>GIS, Mapping, and Spatial Analysis Capstone</li>
@@ -286,8 +287,8 @@
                     </ul>
                 </div>
                 <!-- IELTS Score Chart -->
-                <div class="bg-white p-6 rounded-lg shadow-md card-hover-effect">
-                    <h3 class="font-bold text-xl mb-3 text-teal-700">IELTS Score: 7.5 Overall</h3>
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover-effect border border-cyan-200">
+                    <h3 class="font-bold text-xl mb-3 text-cyan-700">IELTS Score: 7.5 Overall</h3>
                     <div class="chart-container relative w-full h-64 md:h-64 max-w-sm mx-auto">
                         <canvas id="ieltsChart"></canvas>
                     </div>
@@ -297,32 +298,41 @@
 
         <!-- Journey Section -->
         <section id="journey" class="mb-24">
-            <h2 class="text-3xl font-bold text-center mb-2 text-slate-800">Professional & Academic Journey</h2>
-            <p class="text-lg text-slate-600 text-center mb-12">This timeline chronicles my career progression and educational milestones, showcasing a continuous path of growth and learning in the field of geospatial science and technology. Click on any item to see more details.</p>
-            <div class="relative border-l-2 border-teal-200 ml-4 md:ml-0">
+            <h2 class="text-3xl font-bold text-center mb-2 text-gray-800">Professional & Academic Journey</h2>
+            <p class="text-lg text-gray-700 text-center mb-12">This timeline chronicles my career progression and educational milestones, showcasing a continuous path of growth and learning in the field of geospatial science and technology. Click on any item to see more details.</p>
+            <div class="relative border-l-2 border-blue-300 ml-4 md:ml-0">
                 <!-- Timeline items will be injected here by JS -->
             </div>
         </section>
 
         <!-- Volunteering Section -->
         <section id="volunteering" class="mb-24">
-            <h2 class="text-3xl font-bold text-center mb-2 text-slate-800">Volunteering & Pro Bono Work</h2>
-            <p class="text-lg text-slate-600 text-center mb-12">This section highlights my contributions to voluntary and pro bono initiatives, demonstrating my commitment to community and professional development outside of formal employment.</p>
+            <h2 class="text-3xl font-bold text-center mb-2 text-gray-800">Volunteering & Pro Bono Work</h2>
+            <p class="text-lg text-gray-700 text-center mb-12">This section highlights my contributions to voluntary and pro bono initiatives, demonstrating my commitment to community and professional development outside of formal employment.</p>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Voluntary work items will be injected here by JS -->
             </div>
         </section>
 
+        <!-- Conferences Section -->
+        <section id="conferences" class="mb-24">
+            <h2 class="text-3xl font-bold text-center mb-2 text-gray-800">Conferences & Workshops</h2>
+            <p class="text-lg text-gray-700 text-center mb-12">This section details my participation in key conferences, workshops, and industry visits, highlighting my engagement with the latest advancements and collaborative efforts in my field.</p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Conference items will be injected here by JS -->
+            </div>
+        </section>
+
         <!-- Publications Section -->
         <section id="publications" class="mb-24">
-            <h2 class="text-3xl font-bold text-center mb-2 text-slate-800">Publications</h2>
-             <p class="text-lg text-slate-600 text-center mb-8">This section lists my scholarly contributions to the field. You can filter the publications by their current status to explore published works, articles under review, submitted papers, and ongoing research projects.</p>
+            <h2 class="text-3xl font-bold text-center mb-2 text-gray-800">Publications</h2>
+             <p class="text-lg text-gray-700 text-center mb-8">This section lists my scholarly contributions to the field. You can filter the publications by their current status to explore published works, articles under review, submitted papers, and ongoing research projects.</p>
             <div id="publication-filters" class="flex justify-center flex-wrap gap-2 mb-8">
-                <button data-filter="all" class="filter-btn bg-teal-600 text-white px-4 py-2 rounded-full font-semibold active-filter">All</button>
-                <button data-filter="Under Review" class="filter-btn bg-white text-slate-700 px-4 py-2 rounded-full font-semibold">Under Review</button>
-                <button data-filter="Submitted" class="filter-btn bg-white text-slate-700 px-4 py-2 rounded-full font-semibold">Submitted</button>
-                <button data-filter="Published" class="filter-btn bg-white text-slate-700 px-4 py-2 rounded-full font-semibold">Published</button>
-                <button data-filter="Ongoing" class="filter-btn bg-white text-slate-700 px-4 py-2 rounded-full font-semibold">Ongoing</button>
+                <button data-filter="all" class="filter-btn bg-cyan-600 text-white px-4 py-2 rounded-full font-semibold active-filter">All</button>
+                <button data-filter="Under Review" class="filter-btn bg-white text-gray-700 px-4 py-2 rounded-full font-semibold">Under Review</button>
+                <button data-filter="Submitted" class="filter-btn bg-white text-gray-700 px-4 py-2 rounded-full font-semibold">Submitted</button>
+                <button data-filter="Published" class="filter-btn bg-white text-gray-700 px-4 py-2 rounded-full font-semibold">Published</button>
+                <button data-filter="Ongoing" class="filter-btn bg-white text-gray-700 px-4 py-2 rounded-full font-semibold">Ongoing</button>
             </div>
             <div id="publication-list" class="space-y-4">
                 <!-- Publication items will be injected here by JS -->
@@ -331,8 +341,8 @@
 
         <!-- Achievements Section -->
         <section id="achievements" class="mb-24">
-             <h2 class="text-3xl font-bold text-center mb-2 text-slate-800">Achievements & Activities</h2>
-             <p class="text-lg text-slate-600 text-center mb-12">Beyond my core academic and professional work, this section highlights key awards, leadership roles, and extracurricular engagements that reflect my broader skills and commitments.</p>
+             <h2 class="text-3xl font-bold text-center mb-2 text-gray-800">Achievements & Activities</h2>
+             <p class="text-lg text-gray-700 text-center mb-12">Beyond my core academic and professional work, this section highlights key awards, leadership roles, and extracurricular engagements that reflect my broader skills and commitments.</p>
              <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Achievement items will be injected by JS -->
             </div>
@@ -340,18 +350,18 @@
 
         <!-- Contact Section -->
         <section id="contact" class="text-center bg-white p-12 rounded-lg shadow-lg">
-            <h2 class="text-3xl font-bold mb-4 text-slate-800">Get In Touch</h2>
-            <p class="text-lg text-slate-600 mb-6">I am always open to discussing new research projects, collaborations, or opportunities. Feel free to reach out to me or my references.</p>
+            <h2 class="text-3xl font-bold mb-4 text-gray-800">Get In Touch</h2>
+            <p class="text-lg text-gray-700 mb-6">I am always open to discussing new research projects, collaborations, or opportunities. Feel free to reach out to me or my references.</p>
             
             <div class="mb-8 space-y-3">
-                <p class="text-slate-700 font-semibold">Email: <a href="mailto:puspendu.buaa@gmail.com" class="text-teal-600 hover:underline">puspendu.buaa@gmail.com</a>, <a href="mailto:puspendu@buaa.edu.cn" class="text-teal-600 hover:underline">puspendu@buaa.edu.cn</a></p>
-                <p class="text-slate-700 font-semibold">LinkedIn: <a href="https://www.linkedin.com/in/puspendubiswaspaul/" target="_blank" class="text-teal-600 hover:underline">linkedin.com/in/puspendubiswaspaul</a></p>
-                <p class="text-slate-700 font-semibold">ORCID: <a href="https://orcid.org/0009-0002-7216-0102" target="_blank" class="text-teal-600 hover:underline">orcid.org/0009-0002-7216-0102</a></p>
-                <p class="text-slate-700 font-semibold">ResearchGate: <a href="https://www.researchgate.net/profile/Puspendu-Biswas-Paul" target="_blank" class="text-teal-600 hover:underline">researchgate.net/profile/Puspendu-Biswas-Paul</a></p>
-                <p class="text-slate-700 font-semibold">Google Scholar: <a href="https://scholar.google.com/citations?user=L8kjjy8AAAAJ&hl=en&oi=ao" target="_blank" class="text-teal-600 hover:underline">scholar.google.com/citations?user=L8kjjy8AAAAJ</a></p>
+                <p class="text-gray-700 font-semibold">Email: <a href="mailto:puspendu.buaa@gmail.com" class="text-cyan-600 hover:underline">puspendu.buaa@gmail.com</a>, <a href="mailto:puspendu@buaa.edu.cn" class="text-cyan-600 hover:underline">puspendu@buaa.edu.cn</a></p>
+                <p class="text-gray-700 font-semibold">LinkedIn: <a href="https://www.linkedin.com/in/puspendubiswaspaul/" target="_blank" class="text-cyan-600 hover:underline">linkedin.com/in/puspendubiswaspaul</a></p>
+                <p class="text-gray-700 font-semibold">ORCID: <a href="https://orcid.org/0009-0002-7216-0102" target="_blank" class="text-cyan-600 hover:underline">orcid.org/0009-0002-7216-0102</a></p>
+                <p class="text-gray-700 font-semibold">ResearchGate: <a href="https://www.researchgate.net/profile/Puspendu-Biswas-Paul" target="_blank" class="text-cyan-600 hover:underline">researchgate.net/profile/Puspendu-Biswas-Paul</a></p>
+                <p class="text-gray-700 font-semibold">Google Scholar: <a href="https://scholar.google.com/citations?user=L8kjjy8AAAAJ&hl=en&oi=ao" target="_blank" class="text-cyan-600 hover:underline">scholar.google.com/citations?user=L8kjjy8AAAAJ</a></p>
             </div>
 
-            <h3 class="text-2xl font-bold text-slate-800 mb-4">References</h3>
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">References</h3>
             <div class="grid md:grid-cols-3 gap-8 text-left">
                 <!-- References will be injected here by JS -->
             </div>
@@ -359,8 +369,8 @@
 
     </main>
 
-    <footer class="text-center py-6 bg-slate-100">
-        <p class="text-slate-600">Interactive CV for Puspendu Biswas Paul. Created with HTML, Tailwind CSS, and Chart.js.</p>
+    <footer class="text-center py-6 bg-gray-100">
+        <p class="text-gray-600">Interactive CV for Puspendu Biswas Paul. Created with HTML, Tailwind CSS, and Chart.js.</p>
     </footer>
 
     <!-- Floating Download CV Button -->
@@ -370,6 +380,7 @@
     </a>
     <!-- IMPORTANT: Replace 'your_cv_file.pdf' with the actual path to your PDF CV file. -->
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Mobile Menu Toggle
@@ -408,9 +419,9 @@
                         });
                         // Also update active state for water drop menu links
                         menuLinks.forEach(link => {
-                            link.classList.remove('text-teal-600', 'font-bold');
+                            link.classList.remove('text-cyan-600', 'font-bold');
                             if (link.getAttribute('href').substring(1) === entry.target.id) {
-                                link.classList.add('text-teal-600', 'font-bold');
+                                link.classList.add('text-cyan-600', 'font-bold');
                             }
                         });
                     }
@@ -434,12 +445,12 @@
                 const timelineItem = document.createElement('div');
                 timelineItem.className = 'timeline-item bg-white p-6 rounded-lg shadow-md cursor-pointer';
                 timelineItem.innerHTML = `
-                    <p class="text-sm text-slate-500">${item.date}</p>
-                    <h3 class="font-bold text-xl text-slate-700">${item.title}</h3>
-                    <p class="font-semibold text-teal-600">${item.company}</p>
-                    <p class="text-sm text-slate-500 mb-2">${item.location}</p>
-                    <div class="details hidden bg-teal-50 p-4 rounded-md mt-2">
-                        <p class="text-slate-600">${item.details}</p>
+                    <p class="text-sm text-gray-500">${item.date}</p>
+                    <h3 class="font-bold text-xl text-gray-700">${item.title}</h3>
+                    <p class="font-semibold text-cyan-600">${item.company}</p>
+                    <p class="text-sm text-gray-500 mb-2">${item.location}</p>
+                    <div class="details hidden bg-blue-50 p-4 rounded-md mt-2">
+                        <p class="text-gray-700">${item.details}</p>
                     </div>
                 `;
                 journeyContainer.appendChild(timelineItem);
@@ -452,18 +463,41 @@
             // Volunteering Data
             const volunteeringData = [
                 { date: 'April 2025 - Present', title: 'Researcher (Voluntary)', company: 'National Oceanographic And Maritime Institute (NOAMI)', location: 'Dhaka, Bangladesh', details: 'Engaged in GIS, Mapping, and Spatial Analysis projects as a voluntary contributor.' },
+                { date: 'April 2025 - Present', title: 'Member', company: 'South Asian Meteorological Association', location: 'Dhaka, Bangladesh', details: 'Engaged in SAR application, flood detection and Spatial Analysis projects as a voluntary contributor.' },
             ];
             const volunteeringContainer = document.querySelector('#volunteering .grid');
             volunteeringData.forEach(item => {
                 const card = document.createElement('div');
-                card.className = 'bg-white p-6 rounded-lg shadow-md card-hover-effect';
+                card.className = 'bg-white p-6 rounded-lg shadow-md card-hover-effect border border-lime-200'; /* New color */
                 card.innerHTML = `
-                    <h3 class="font-bold text-xl mb-3 text-teal-700">${item.title}</h3>
-                    <p class="font-semibold text-slate-600">${item.company}</p>
-                    <p class="text-sm text-slate-500 mb-2">${item.date} | ${item.location}</p>
-                    <p class="text-slate-600">${item.details}</p>
+                    <h3 class="font-bold text-xl mb-3 text-lime-700">${item.title}</h3>
+                    <p class="font-semibold text-gray-700">${item.company}</p>
+                    <p class="text-sm text-gray-500 mb-2">${item.date} | ${item.location}</p>
+                    <p class="text-gray-700">${item.details}</p>
                 `;
                 volunteeringContainer.appendChild(card);
+            });
+
+            // Conferences Data
+            const conferencesData = [
+                { title: 'STAR.VISION AT 2050 Conference', location: 'Yunqi Tower, China', date: 'April 2025', description: 'Explored visionary strategies for space technology and sustainable development.' },
+                { title: 'Group on Earth Observation (GEO) Conference', location: 'Hangzhou, China', date: 'September 2024', description: 'Focused on advancing Earth observation technologies for global environmental monitoring.' },
+                { title: 'UN GEO Conference', location: 'Deqing, China', date: 'December 2024', description: 'Engaged in high-level discussions on geospatial data and international collaboration.' },
+                { title: 'Special National Strategic Conference for GMSA', location: 'Lakeside University, Ghana', date: 'May 2022', description: 'Contributed to youth-led policy and Islamic leadership development.' },
+                { title: 'CHCNAV Company Visit', location: 'Shanghai, China', date: 'January 2025', description: 'Explored advancements in geospatial navigation systems and survey technologies.' },
+                { title: 'IEEE International Symposium on Smart Electronic Systems (iSES)', location: 'Jaipur, India', date: 'December 18-22, 2021', description: 'Attended the conference, gaining insights into the latest advancements in smart electronic systems. Engaged with researchers, engineers, and industry professionals.' }
+            ];
+            const conferencesContainer = document.querySelector('#conferences .grid');
+            conferencesData.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'bg-white p-6 rounded-lg shadow-md card-hover-effect border border-amber-200'; /* New color */
+                card.innerHTML = `
+                    <h3 class="font-bold text-xl mb-3 text-amber-700">${item.title}</h3>
+                    <p class="font-semibold text-gray-700">${item.location}</p>
+                    <p class="text-sm text-gray-500 mb-2">${item.date}</p>
+                    <p class="text-gray-700">${item.description}</p>
+                `;
+                conferencesContainer.appendChild(card);
             });
 
 
@@ -494,7 +528,7 @@
                     item.className = 'publication-item bg-white p-4 rounded-lg shadow-sm transition-all duration-300 card-hover-effect';
                     item.setAttribute('data-category', pub.category);
                     item.innerHTML = `
-                        <p class="text-slate-700">${pub.title}</p>
+                        <p class="text-gray-700">${pub.title}</p>
                         <span class="text-xs font-bold uppercase mt-2 inline-block px-2 py-1 rounded-md ${pub.category === 'Under Review' ? 'bg-yellow-100 text-yellow-800' : pub.category === 'Submitted' ? 'bg-blue-100 text-blue-800' : pub.category === 'Ongoing' ? 'bg-purple-100 text-purple-800' : 'bg-green-100 text-green-800'}">${pub.category}</span>
                     `;
                     publicationList.appendChild(item);
@@ -518,17 +552,16 @@
             const achievementsData = [
                 { title: 'Chinese Government Scholarship', description: 'Awarded for Master\'s study at Beihang University.', type: 'academic' },
                 { title: 'UN International Workshop on GIS Technology and Application', description: 'Certificate of Completion from United Nations Global Geospatial Knowledge and Innovation Centre (June 2025).', type: 'academic' },
-                { title: 'IEEE iSES Conference', description: 'Participant in the International Symposium on Smart Electronic Systems.', type: 'academic' },
                 { title: 'Yellow Belt, Karate', description: 'Achieved Yellow Belt from Shotokan Karate International Federation.', type: 'activity' },
                 { title: 'Photography', description: 'Active photographer with the Jessore Photographic Society.', type: 'activity' }
             ];
             const achievementsContainer = document.querySelector('#achievements .grid');
             achievementsData.forEach(item => {
                 const card = document.createElement('div');
-                card.className = `p-6 rounded-lg shadow-md card-hover-effect ${item.type === 'academic' ? 'bg-indigo-50 text-indigo-800' : 'bg-pink-50 text-pink-800'}`; /* Updated colors */
+                card.className = `p-6 rounded-lg shadow-md card-hover-effect ${item.type === 'academic' ? 'bg-sky-100 text-sky-800 border border-sky-200' : 'bg-fuchsia-100 text-fuchsia-800 border border-fuchsia-200'}`; /* Updated colors */
                 card.innerHTML = `
                     <h3 class="font-bold text-lg mb-2">${item.title}</h3>
-                    <p class="text-slate-600">${item.description}</p>
+                    <p class="text-gray-700">${item.description}</p>
                 `;
                 achievementsContainer.appendChild(card);
             });
@@ -542,12 +575,12 @@
             const referencesContainer = document.querySelector('#contact .grid');
             referencesData.forEach(item => {
                 const card = document.createElement('div');
-                card.className = 'bg-slate-50 p-6 rounded-lg shadow-md card-hover-effect';
+                card.className = 'bg-gray-100 p-6 rounded-lg shadow-md card-hover-effect border border-gray-200';
                 card.innerHTML = `
-                    <h3 class="font-bold text-lg text-slate-800">${item.name}</h3>
-                    <p class="text-slate-600 italic">${item.title}</p>
-                    <p class="text-sm text-slate-500 mb-3">(${item.relation})</p>
-                    <a href="${item.link}" target="_blank" class="text-teal-600 font-semibold hover:underline">View Profile &rarr;</a>
+                    <h3 class="font-bold text-lg text-gray-800">${item.name}</h3>
+                    <p class="text-gray-700 italic">${item.title}</p>
+                    <p class="text-sm text-gray-600 mb-3">(${item.relation})</p>
+                    <a href="${item.link}" target="_blank" class="text-cyan-600 font-semibold hover:underline">View Profile &rarr;</a>
                 `;
                 referencesContainer.appendChild(card);
             });
@@ -562,13 +595,13 @@
                     datasets: [{
                         label: 'IELTS Score',
                         data: [8.5, 8.0, 6.5, 7.0],
-                        backgroundColor: 'rgba(13, 148, 136, 0.2)',
-                        borderColor: 'rgba(13, 148, 136, 1)',
+                        backgroundColor: 'rgba(59, 130, 246, 0.4)', /* Blue-500 with opacity */
+                        borderColor: 'rgba(59, 130, 246, 1)', /* Blue-500 */
                         borderWidth: 2,
-                        pointBackgroundColor: 'rgba(13, 148, 136, 1)',
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)',
                         pointBorderColor: '#fff',
                         pointHoverBackgroundColor: '#fff',
-                        pointHoverBorderColor: 'rgba(13, 148, 136, 1)'
+                        pointHoverBorderColor: 'rgba(59, 130, 246, 1)'
                     }]
                 },
                 options: {
@@ -577,23 +610,24 @@
                     scales: {
                         r: {
                             angleLines: {
-                                color: 'rgba(0, 0, 0, 0.1)'
+                                color: 'rgba(0, 0, 0, 0.15)' /* Slightly darker grid lines */
                             },
                             grid: {
-                                color: 'rgba(0, 0, 0, 0.1)'
+                                color: 'rgba(0, 0, 0, 0.15)' /* Slightly darker grid lines */
                             },
                             pointLabels: {
                                 font: {
                                     size: 14,
                                     family: 'Inter',
                                 },
-                                color: '#1e293b'
+                                color: '#1f2937' /* Dark slate for labels */
                             },
                             suggestedMin: 0,
                             suggestedMax: 9,
                              ticks: {
-                                backdropColor: 'rgba(255, 255, 255, 0.75)',
-                                stepSize: 1
+                                backdropColor: 'white', /* Fully opaque white tick background */
+                                stepSize: 1,
+                                color: '#1f2937' /* Dark slate for tick labels */
                             }
                         }
                     },
