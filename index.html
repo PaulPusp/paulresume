@@ -53,25 +53,39 @@
         }
 
         #about {
-            /* Layer 1: Subtle clipart pattern (very light dots) */
-            background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px),
-                              /* Layer 2: Transparent color overlay (40% opaque to show 60% image) */
-                              linear-gradient(to bottom right, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), /* Darker overlay */
-                              /* Layer 3: Satellite image */
-                              url('https://images.unsplash.com/photo-1543722530-d2c320790761?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-            
-            background-size: 20px 20px, cover, cover; /* Sizes for each layer */
-            background-position: center center, center center, center center;
-            background-repeat: repeat, no-repeat, no-repeat;
-            background-attachment: scroll, scroll, scroll; /* Scroll with content */
+            position: relative; /* Needed for absolute positioning of video and overlay */
+            overflow: hidden; /* Hide video overflow */
             padding-top: 3rem; /* Add some padding to the top and bottom */
             padding-bottom: 3rem;
             border-radius: 1.5rem; /* Rounded corners for the about section */
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             margin-top: 2rem; /* Space from header */
+            z-index: 1; /* Ensure content is above video */
+        }
+        #about-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Cover the entire section */
+            z-index: -2; /* Place behind content */
+        }
+        #about-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4); /* Darker overlay (40% opaque) */
+            z-index: -1; /* Place between video and content */
+        }
+        #about .content-wrapper {
+            position: relative; /* Ensure content is above overlay */
+            z-index: 1;
         }
         #about h1, #about p, #about a {
-            color: #ffffff; /* White text for readability on image background */
+            color: #ffffff; /* White text for readability on video background */
             text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Add text shadow for better readability */
         }
 
@@ -262,18 +276,25 @@
 
         <!-- About Section -->
         <section id="about" class="mb-24 text-center">
-            <img src="https://scontent-hkg1-2.xx.fbcdn.net/v/t39.30808-6/493334436_626215743752314_4712431554108028776_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=h-XpZfPF7s4Q7kNvwGwpZ_z&_nc_oc=AdnNFT4ivDOQJ9GSa_G_LGeRlbiCH8lq-4BlbR7CwbNPvXehlP4EmJPoC9kY3JRaz4w&_nc_zt=23&_nc_ht=scontent-hkg1-2.xx&_nc_gid=PxDIbNj-qWiB3Xk3OAJldg&oh=00_AfTeQNvY7BgcQZqCgYR3HF4yGQeSc_yi-qen89DoZw0vcw&oe=6880F736" alt="Puspendu Biswas Paul Profile Picture" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover shadow-xl border-4 border-cyan-300"> <!-- Replace with your profile picture URL -->
-            <h1 class="text-5xl md:text-6xl font-extrabold header-text mb-2 leading-tight">Puspendu Biswas Paul</h1>
-            <p class="max-w-4xl mx-auto text-lg header-text">
-                A highly motivated and dedicated professional with a strong background in Synthetic Aperture Radar (SAR) data, Artificial Intelligence (AI), and remote sensing. Committed to leveraging advanced technologies to address complex geospatial challenges. Expertise includes developing AI-driven models for SAR data analysis, enabling enhanced environmental monitoring and disaster management.
-            </p>
-            <div class="mt-6 flex justify-center space-x-4">
-                <a href="mailto:puspendu.buaa@gmail.com" class="header-link hover:text-white transition duration-300">
-                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6M20 6L12 11L4 6H20M20 18H4V8L12 13L20 8V18Z" /></svg>
-                </a>
-                <a href="https://www.linkedin.com/in/puspendubiswaspaul" target="_blank" class="header-link hover:text-white transition duration-300">
-                    <i class="fab fa-linkedin fa-2x"></i> <!-- Font Awesome LinkedIn icon -->
-                </a>
+            <video id="about-video" autoplay loop muted playsinline>
+                <source src="https://dlmultimedia.esa.int/download/public/videos/2014/01/031/1401_031_AR_EN.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div id="about-overlay"></div>
+            <div class="content-wrapper">
+                <img src="https://scontent-hkg1-2.xx.fbcdn.net/v/t39.30808-6/493334436_626215743752314_4712431554108028776_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=h-XpZfPF7s4Q7kNvwGwpZ_z&_nc_oc=AdnNFT4ivDOQJ9GSa_G_LGeRlbiCH8lq-4BlbR7CwbNPvXehlP4EmJPoC9kY3JRaz4w&_nc_zt=23&_nc_ht=scontent-hkg1-2.xx&_nc_gid=PxDIbNj-qWiB3Xk3OAJldg&oh=00_AfTeQNvY7BgcQZqCgYR3HF4yGQeSc_yi-qen89DoZw0vcw&oe=6880F736" alt="Puspendu Biswas Paul Profile Picture" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover shadow-xl border-4 border-cyan-300"> <!-- Replace with your profile picture URL -->
+                <h1 class="text-5xl md:text-6xl font-extrabold header-text mb-2 leading-tight">Puspendu Biswas Paul</h1>
+                <p class="max-w-4xl mx-auto text-lg header-text">
+                    A highly motivated and dedicated professional with a strong background in Synthetic Aperture Radar (SAR) data, Artificial Intelligence (AI), and remote sensing. Committed to leveraging advanced technologies to address complex geospatial challenges. Expertise includes developing AI-driven models for SAR data analysis, enabling enhanced environmental monitoring and disaster management.
+                </p>
+                <div class="mt-6 flex justify-center space-x-4">
+                    <a href="mailto:puspendu.buaa@gmail.com" class="header-link hover:text-white transition duration-300">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6M20 6L12 11L4 6H20M20 18H4V8L12 13L20 8V18Z" /></svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/puspendubiswaspaul" target="_blank" class="header-link hover:text-white transition duration-300">
+                        <i class="fab fa-linkedin fa-2x"></i> <!-- Font Awesome LinkedIn icon -->
+                    </a>
+                </div>
             </div>
         </section>
 
