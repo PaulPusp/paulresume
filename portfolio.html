@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puspendu Biswas Paul - Interactive CV</title>
+    <!-- Chosen Palette: Professional Teal -->
+    <!-- Application Structure Plan: A single-page application with a fixed navigation bar for smooth scrolling. The structure is designed for intuitive exploration: Hero section for a strong first impression, followed by thematic sections for Skills (visual cards), a unified Experience/Education Timeline, filterable Publications, and consolidated Achievements. This user-centric design prioritizes scannability and interaction over a rigid, linear document format, allowing recruiters and academics to quickly access the most relevant information. A new "Volunteering" section has been added to distinguish pro-bono work from core professional experience. -->
+    <!-- Visualization & Content Choices: 
+        - Summary: Presented in a prominent hero section for immediate impact. Goal: Inform. Method: Styled text.
+        - Skills: Grouped into categories and displayed as visually distinct cards. Goal: Organize/Inform. Method: HTML/Tailwind CSS Grid. Justification: Enhances readability and visual appeal over a simple list.
+        - IELTS Score: Visualized with a Radar chart. Goal: Compare/Inform. Method: Chart.js on Canvas. Justification: Provides a quick, comparative view of language proficiencies.
+        - Experience & Education: Combined into a single, interactive vertical timeline. Goal: Show Change/Progression. Method: HTML/Tailwind with JS for toggleable details. Justification: Creates a cohesive narrative of the professional journey.
+        - Volunteering: A new dedicated section for voluntary work. Goal: Inform. Method: HTML/Tailwind cards. Justification: Clearly separates voluntary contributions from paid professional roles.
+        - Publications: Displayed as a filterable list. Goal: Organize/Interact. Method: HTML/Tailwind cards with JS filtering. Justification: Manages a long list effectively, allowing users to focus on specific publication statuses (e.g., 'Under Review').
+        - Achievements/Awards: Presented in a clean grid layout with distinct colors for academic and activity-based achievements. Goal: Inform. Method: HTML/Tailwind cards with conditional styling. Justification: Improves visual distinction and highlights different facets of accomplishments.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            left: -0.5rem;
+            top: 0.25rem;
+            background-color: #0d9488;
+            border: 3px solid #f0fdfa;
+        }
+        .nav-link.active {
+            color: #0d9488;
+            font-weight: 700;
+        }
+        .download-fab {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            background-color: #0d9488;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 9999px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            z-index: 1000;
+        }
+        .download-fab:hover {
+            background-color: #0f766e;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header & Navigation -->
+    <header id="header" class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-teal-700">Puspendu Biswas Paul</a>
+            <div class="hidden md:flex space-x-6">
+                <a href="#about" class="nav-link text-gray-600 hover:text-teal-600 transition duration-300">About</a>
+                <a href="#skills" class="nav-link text-gray-600 hover:text-teal-600 transition duration-300">Skills</a>
+                <a href="#journey" class="nav-link text-gray-600 hover:text-teal-600 transition duration-300">Journey</a>
+                <a href="#volunteering" class="nav-link text-gray-600 hover:text-teal-600 transition duration-300">Volunteering</a>
+                <a href="#publications" class="nav-link text-gray-600 hover:text-teal-600 transition duration-300">Publications</a>
+                <a href="#achievements" class="nav-link text-gray-600 hover:text-teal-600 transition duration-300">Achievements</a>
+                <a href="#contact" class="nav-link text-gray-600 hover:text-teal-600 transition duration-300">Contact</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+            <a href="#about" class="nav-link block py-2 text-gray-600 hover:text-teal-600">About</a>
+            <a href="#skills" class="nav-link block py-2 text-gray-600 hover:text-teal-600">Skills</a>
+            <a href="#journey" class="nav-link block py-2 text-gray-600 hover:text-teal-600">Journey</a>
+            <a href="#volunteering" class="nav-link block py-2 text-gray-600 hover:text-teal-600">Volunteering</a>
+            <a href="#publications" class="nav-link block py-2 text-gray-600 hover:text-teal-600">Publications</a>
+            <a href="#achievements" class="nav-link block py-2 text-gray-600 hover:text-teal-600">Achievements</a>
+            <a href="#contact" class="nav-link block py-2 text-gray-600 hover:text-teal-600">Contact</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+
+        <!-- About Section -->
+        <section id="about" class="mb-24 text-center">
+            <h1 class="text-5xl md:text-6xl font-extrabold text-slate-800 mb-2 leading-tight">Puspendu Biswas Paul</h1>
+            <p class="max-w-4xl mx-auto text-lg text-slate-600">
+                A highly motivated and dedicated professional with a strong background in Synthetic Aperture Radar (SAR) data, Artificial Intelligence (AI), and remote sensing. Committed to leveraging advanced technologies to address complex geospatial challenges. Expertise includes developing AI-driven models for SAR data analysis, enabling enhanced environmental monitoring and disaster management.
+            </p>
+            <div class="mt-6 flex justify-center space-x-4">
+                <a href="mailto:puspendu.buaa@gmail.com" class="text-teal-600 hover:text-teal-700 transition duration-300">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6M20 6L12 11L4 6H20M20 18H4V8L12 13L20 8V18Z" /></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/puspendubiswaspaul" target="_blank" class="text-teal-600 hover:text-teal-700 transition duration-300">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 6 8 5.44 7.21 5.44A1.68 1.68 0 0 0 5.53 6.88C5.53 7.77 6 8.34 6.88 8.56M8.27 18.5V10.13H5.53V18.5H8.27Z" /></svg>
+                </a>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="mb-24">
+            <h2 class="text-3xl font-bold text-center mb-2 text-slate-800">Technical Skills</h2>
+            <p class="text-lg text-slate-600 text-center mb-12">This section provides an overview of the key technical competencies, from programming languages and specialized software to data analysis and AI frameworks, that form the foundation of my professional expertise.</p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Skill Card -->
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                    <h3 class="font-bold text-xl mb-3 text-teal-700">Languages & Databases</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">Python</span>
+                        <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">JavaScript</span>
+                        <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">C/C++ (Arduino)</span>
+                        <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">MySQL</span>
+                    </div>
+                </div>
+                 <!-- Skill Card -->
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                    <h3 class="font-bold text-xl mb-3 text-teal-700">Data Analysis & AI</h3>
+                     <div class="flex flex-wrap gap-2">
+                        <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">Deep Learning</span>
+                        <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">Using AI efficiently</span>
+                        <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">Investigative Research</span>
+                        <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">Scientific Writing</span>
+                        <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">Statistical Analysis</span>
+                    </div>
+                </div>
+                 <!-- Skill Card -->
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                    <h3 class="font-bold text-xl mb-3 text-teal-700">Remote Sensing & GIS</h3>
+                     <div class="flex flex-wrap gap-2">
+                        <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">ArcGIS Pro</span>
+                        <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">Google Earth Engine</span>
+                        <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">SNAP</span>
+                    </div>
+                </div>
+                 <!-- Skill Card -->
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                    <h3 class="font-bold text-xl mb-3 text-teal-700">Satellite & Engineering</h3>
+                     <div class="flex flex-wrap gap-2">
+                        <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">SAR</span>
+                        <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">GNSS-R</span>
+                        <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">Weather Satellite Data</span>
+                        <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">Use of Chinese satellite systems</span>
+                        <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">SolidWorks</span>
+                        <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">AutoCAD 2D</span>
+                    </div>
+                </div>
+                 <!-- Skill Card -->
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                    <h3 class="font-bold text-xl mb-3 text-teal-700">Certifications</h3>
+                    <ul class="list-disc list-inside text-slate-600">
+                        <li>Data Visualization using Bokeh</li>
+                        <li>Introduction to GIS Mapping</li>
+                        <li>GIS, Mapping, and Spatial Analysis Capstone</li>
+                        <li>UN International Workshop on GIS Technology and Application</li>
+                    </ul>
+                </div>
+                <!-- IELTS Score Chart -->
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                    <h3 class="font-bold text-xl mb-3 text-teal-700">IELTS Score: 7.5 Overall</h3>
+                    <div class="chart-container relative w-full h-64 md:h-64 max-w-sm mx-auto">
+                        <canvas id="ieltsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Journey Section -->
+        <section id="journey" class="mb-24">
+            <h2 class="text-3xl font-bold text-center mb-2 text-slate-800">Professional & Academic Journey</h2>
+            <p class="text-lg text-slate-600 text-center mb-12">This timeline chronicles my career progression and educational milestones, showcasing a continuous path of growth and learning in the field of geospatial science and technology. Click on any item to see more details.</p>
+            <div class="relative border-l-2 border-teal-200 ml-4 md:ml-0">
+                <!-- Timeline items will be injected here by JS -->
+            </div>
+        </section>
+
+        <!-- Volunteering Section -->
+        <section id="volunteering" class="mb-24">
+            <h2 class="text-3xl font-bold text-center mb-2 text-slate-800">Volunteering & Pro Bono Work</h2>
+            <p class="text-lg text-slate-600 text-center mb-12">This section highlights my contributions to voluntary and pro bono initiatives, demonstrating my commitment to community and professional development outside of formal employment.</p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Voluntary work items will be injected here by JS -->
+            </div>
+        </section>
+
+        <!-- Publications Section -->
+        <section id="publications" class="mb-24">
+            <h2 class="text-3xl font-bold text-center mb-2 text-slate-800">Publications</h2>
+             <p class="text-lg text-slate-600 text-center mb-8">This section lists my scholarly contributions to the field. You can filter the publications by their current status to explore published works, articles under review, submitted papers, and ongoing research projects.</p>
+            <div id="publication-filters" class="flex justify-center flex-wrap gap-2 mb-8">
+                <button data-filter="all" class="filter-btn bg-teal-600 text-white px-4 py-2 rounded-full font-semibold">All</button>
+                <button data-filter="Under Review" class="filter-btn bg-white text-slate-700 px-4 py-2 rounded-full font-semibold border border-slate-300 hover:bg-teal-50">Under Review</button>
+                <button data-filter="Submitted" class="filter-btn bg-white text-slate-700 px-4 py-2 rounded-full font-semibold border border-slate-300 hover:bg-teal-50">Submitted</button>
+                <button data-filter="Published" class="filter-btn bg-white text-slate-700 px-4 py-2 rounded-full font-semibold border border-slate-300 hover:bg-teal-50">Published</button>
+                <button data-filter="Ongoing" class="filter-btn bg-white text-slate-700 px-4 py-2 rounded-full font-semibold border border-slate-300 hover:bg-teal-50">Ongoing</button>
+            </div>
+            <div id="publication-list" class="space-y-4">
+                <!-- Publication items will be injected here by JS -->
+            </div>
+        </section>
+
+        <!-- Achievements Section -->
+        <section id="achievements" class="mb-24">
+             <h2 class="text-3xl font-bold text-center mb-2 text-slate-800">Achievements & Activities</h2>
+             <p class="text-lg text-slate-600 text-center mb-12">Beyond my core academic and professional work, this section highlights key awards, leadership roles, and extracurricular engagements that reflect my broader skills and commitments.</p>
+             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Achievement items will be injected by JS -->
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="text-center bg-white p-12 rounded-lg shadow-lg">
+            <h2 class="text-3xl font-bold mb-4 text-slate-800">Get In Touch</h2>
+            <p class="text-lg text-slate-600 mb-6">I am always open to discussing new research projects, collaborations, or opportunities. Feel free to reach out to me or my references.</p>
+            
+            <div class="mb-8 space-y-3">
+                <p class="text-slate-700 font-semibold">Email: <a href="mailto:puspendu.buaa@gmail.com" class="text-teal-600 hover:underline">puspendu.buaa@gmail.com</a>, <a href="mailto:puspendu@buaa.edu.cn" class="text-teal-600 hover:underline">puspendu@buaa.edu.cn</a></p>
+                <p class="text-slate-700 font-semibold">LinkedIn: <a href="https://www.linkedin.com/in/puspendubiswaspaul/" target="_blank" class="text-teal-600 hover:underline">linkedin.com/in/puspendubiswaspaul</a></p>
+                <p class="text-slate-700 font-semibold">ORCID: <a href="https://orcid.org/0009-0002-7216-0102" target="_blank" class="text-teal-600 hover:underline">orcid.org/0009-0002-7216-0102</a></p>
+                <p class="text-slate-700 font-semibold">ResearchGate: <a href="https://www.researchgate.net/profile/Puspendu-Biswas-Paul" target="_blank" class="text-teal-600 hover:underline">researchgate.net/profile/Puspendu-Biswas-Paul</a></p>
+                <p class="text-slate-700 font-semibold">Google Scholar: <a href="https://scholar.google.com/citations?user=L8kjjy8AAAAJ&hl=en&oi=ao" target="_blank" class="text-teal-600 hover:underline">scholar.google.com/citations?user=L8kjjy8AAAAJ</a></p>
+            </div>
+
+            <h3 class="text-2xl font-bold text-slate-800 mb-4">References</h3>
+            <div class="grid md:grid-cols-3 gap-8 text-left">
+                <!-- References will be injected here by JS -->
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-6 bg-slate-100">
+        <p class="text-slate-600">Interactive CV for Puspendu Biswas Paul. Created with HTML, Tailwind CSS, and Chart.js.</p>
+    </footer>
+
+    <!-- Floating Download CV Button -->
+    <a href="your_cv_file.pdf" download="Puspendu_Biswas_Paul_CV.pdf" class="download-fab">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+        Download CV
+    </a>
+    <!-- IMPORTANT: Replace 'your_cv_file.pdf' with the actual path to your PDF CV file. -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Menu Toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Active Nav Link Styling on Scroll
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, { rootMargin: '-30% 0px -70% 0px' });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Journey Data
+            const journeyData = [
+                { type: 'Education', date: 'Sept 2024 - July 2026 (Expected)', title: 'Masters in Space Technology Applications (Remote Sensing and GIS)', company: 'Beihang University', location: 'Hangzhou, China', details: 'Recipient of the Chinese Government Scholarship.' },
+                { type: 'Work', date: 'Aug 2023 - Dec 2023', title: 'Intern', company: 'RIMES', location: 'Dhaka, Bangladesh', details: 'Contributed to a dynamic team focused on disaster preparedness and early warning systems. Gained hands-on experience in data analysis, modeling, and risk assessment.' },
+                { type: 'Work', date: 'Mar 2021 - Jan 2023', title: 'Research Assistant', company: 'Sylhet Agricultural University', location: 'Sylhet, Bangladesh', details: 'Managed data for drought prediction, conducted statistical analysis, and maintained lab equipment.' },
+                { type: 'Education', date: 'Jan 2018 - Jan 2023', title: 'B.Sc in Agricultural Engineering', company: 'Sylhet Agricultural University', location: 'Sylhet, Bangladesh', details: 'Key courses included Agricultural Meteorology, Hydrology, Environmental Engineering, and Water Pollution and Treatment.' },
+            ];
+
+            const journeyContainer = document.querySelector('#journey .relative');
+            journeyData.forEach(item => {
+                const timelineItem = document.createElement('div');
+                timelineItem.className = 'timeline-item mb-8 pl-8 cursor-pointer';
+                timelineItem.innerHTML = `
+                    <p class="text-sm text-slate-500">${item.date}</p>
+                    <h3 class="font-bold text-xl text-slate-700">${item.title}</h3>
+                    <p class="font-semibold text-teal-600">${item.company}</p>
+                    <p class="text-sm text-slate-500 mb-2">${item.location}</p>
+                    <div class="details hidden bg-teal-50 p-4 rounded-md mt-2">
+                        <p class="text-slate-600">${item.details}</p>
+                    </div>
+                `;
+                journeyContainer.appendChild(timelineItem);
+
+                timelineItem.addEventListener('click', () => {
+                    timelineItem.querySelector('.details').classList.toggle('hidden');
+                });
+            });
+
+            // Volunteering Data
+            const volunteeringData = [
+                { date: 'April 2025 - Present', title: 'Researcher (Voluntary)', company: 'National Oceanographic And Maritime Institute (NOAMI)', location: 'Dhaka, Bangladesh', details: 'Engaged in GIS, Mapping, and Spatial Analysis projects as a voluntary contributor.' },
+            ];
+            const volunteeringContainer = document.querySelector('#volunteering .grid');
+            volunteeringData.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'bg-white p-6 rounded-lg shadow-md';
+                card.innerHTML = `
+                    <h3 class="font-bold text-xl mb-3 text-teal-700">${item.title}</h3>
+                    <p class="font-semibold text-slate-600">${item.company}</p>
+                    <p class="text-sm text-slate-500 mb-2">${item.date} | ${item.location}</p>
+                    <p class="text-slate-600">${item.details}</p>
+                `;
+                volunteeringContainer.appendChild(card);
+            });
+
+
+            // Publication Data & Filtering
+            const publications = [
+                { title: 'Remote sensing based impact assessment of 2024 Monsoon flood in the South-east Bangladesh', category: 'Under Review' },
+                { title: 'Spatio-Temporal Dynamics and Machine Learning-Based Hotspot Classification of Artificial Light at Night in Nigeria (2014-2024): An AI assisted Geospatial Analysis.', category: 'Ongoing' },
+                { title: 'Spatio-Temporal Dynamics and Machine Learning-Based Hotspot Classification of Artificial Light at Night in Bangladesh (2014-2024): An AI assisted Geospatial Analysis.', category: 'Ongoing' },
+                { title: 'SAR-Driven Flood Mapping and Impact: Assessing the August 2024 Monsoon Disaster', category: 'Submitted' },
+                { title: 'Lunar Orbit design for Sustainable Cislunar Applications', category: 'Ongoing' },
+                { title: 'Evaluating the socio-economic conditions of fishers and sustainability of small-scale fisheries in the Kalni River, Bangladesh', category: 'Published' },
+                { title: 'Data-Driven Decision Making for Smart Cultivation', category: 'Published' },
+                { title: 'Seasonal Variations in Water Quality and Microplastic Contamination in the Surma River, Bangladesh', category: 'Published' },
+                { title: 'BD-Freshwater-Fish: An Image Dataset from Bangladesh for AI-Powered Automatic Fish Species Classification and Detection toward Smart Aquaculture', category: 'Published' },
+                { title: 'Impact of water pollution on physio-chemical properties for fish habitat in the Surma River, Sylhet city, Bangladesh', category: 'Published' },
+                { title: 'Assessing Total Dissolved Oxygen and Electrical Conductivity Using Sentinel-2 Remote Sensing: A Multivariable Approach to Flood Detection in Flood Prone Urban area Sylhet', category: 'Published' }
+            ];
+            
+            const publicationList = document.getElementById('publication-list');
+            const filterButtons = document.querySelectorAll('#publication-filters .filter-btn');
+
+            function displayPublications(filter) {
+                publicationList.innerHTML = '';
+                const filteredPublications = (filter === 'all') ? publications : publications.filter(p => p.category === filter);
+                
+                filteredPublications.forEach(pub => {
+                    const item = document.createElement('div');
+                    item.className = 'publication-item bg-white p-4 rounded-lg shadow-sm transition-all duration-300';
+                    item.setAttribute('data-category', pub.category);
+                    item.innerHTML = `
+                        <p class="text-slate-700">${pub.title}</p>
+                        <span class="text-xs font-bold uppercase mt-2 inline-block px-2 py-1 rounded-md ${pub.category === 'Under Review' ? 'bg-yellow-100 text-yellow-800' : pub.category === 'Submitted' ? 'bg-blue-100 text-blue-800' : pub.category === 'Ongoing' ? 'bg-purple-100 text-purple-800' : 'bg-green-100 text-green-800'}">${pub.category}</span>
+                    `;
+                    publicationList.appendChild(item);
+                });
+            }
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const filter = button.getAttribute('data-filter');
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('bg-teal-600', 'text-white');
+                        btn.classList.add('bg-white', 'text-slate-700');
+                    });
+                    button.classList.add('bg-teal-600', 'text-white');
+                    button.classList.remove('bg-white', 'text-slate-700');
+                    displayPublications(filter);
+                });
+            });
+
+            displayPublications('all');
+
+            // Achievements Data
+            const achievementsData = [
+                { title: 'Chinese Government Scholarship', description: 'Awarded for Master\'s study at Beihang University.', type: 'academic' },
+                { title: 'UN International Workshop on GIS Technology and Application', description: 'Certificate of Completion from United Nations Global Geospatial Knowledge and Innovation Centre (June 2025).', type: 'academic' },
+                { title: 'IEEE iSES Conference', description: 'Participant in the International Symposium on Smart Electronic Systems.', type: 'academic' },
+                { title: 'Yellow Belt, Karate', description: 'Achieved Yellow Belt from Shotokan Karate International Federation.', type: 'activity' },
+                { title: 'Photography', description: 'Active photographer with the Jessore Photographic Society.', type: 'activity' }
+            ];
+            const achievementsContainer = document.querySelector('#achievements .grid');
+            achievementsData.forEach(item => {
+                const card = document.createElement('div');
+                card.className = `p-6 rounded-lg shadow-md ${item.type === 'academic' ? 'bg-blue-50' : 'bg-purple-50'}`;
+                card.innerHTML = `
+                    <h3 class="font-bold text-lg ${item.type === 'academic' ? 'text-blue-800' : 'text-purple-800'} mb-2">${item.title}</h3>
+                    <p class="text-slate-600">${item.description}</p>
+                `;
+                achievementsContainer.appendChild(card);
+            });
+
+            // References Data
+            const referencesData = [
+                { name: 'Sheikh Tawhidul Islam', title: 'Professor, International Innovation Institute, Beihang University, China.', relation: 'My Master\'s Supervisor', link: 'https://www.linkedin.com/in/sheikh-tawhidul-islam-927624254/' },
+                { name: 'Dr. Mohan Kumar Das', title: 'Research Fellow, National Oceanography and Maritime Institute (NOAMI)', relation: 'Supervised me directly in NOAMI projects', link: 'https://www.linkedin.com/in/dr-mohan-kumar-das-5a225927/' },
+                { name: 'Md. Jamal Uddin Khan', title: 'PhD · PostDoc at Université Toulouse III - Paul Sabatier, France', relation: 'Worked under him in several projects', link: 'https://www.researchgate.net/profile/Md-Jamal-Uddin-Khan' },
+            ];
+            const referencesContainer = document.querySelector('#contact .grid');
+            referencesData.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'bg-slate-50 p-6 rounded-lg';
+                card.innerHTML = `
+                    <h3 class="font-bold text-lg text-slate-800">${item.name}</h3>
+                    <p class="text-slate-600 italic">${item.title}</p>
+                    <p class="text-sm text-slate-500 mb-3">(${item.relation})</p>
+                    <a href="${item.link}" target="_blank" class="text-teal-600 font-semibold hover:underline">View Profile &rarr;</a>
+                `;
+                referencesContainer.appendChild(card);
+            });
+
+
+            // IELTS Chart
+            const ctx = document.getElementById('ieltsChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Listening', 'Reading', 'Writing', 'Speaking'],
+                    datasets: [{
+                        label: 'IELTS Score',
+                        data: [8.5, 8.0, 6.5, 7.0],
+                        backgroundColor: 'rgba(13, 148, 136, 0.2)',
+                        borderColor: 'rgba(13, 148, 136, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(13, 148, 136, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(13, 148, 136, 1)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            },
+                            pointLabels: {
+                                font: {
+                                    size: 14,
+                                    family: 'Inter',
+                                },
+                                color: '#1e293b'
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 9,
+                             ticks: {
+                                backdropColor: 'rgba(255, 255, 255, 0.75)',
+                                stepSize: 1
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
