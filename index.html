@@ -27,19 +27,55 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
+            background: linear-gradient(to bottom right, #e0f7fa, #c2e9fb); /* Lighter, more vibrant blue gradient for main body */
+            color: #1a202c; /* Darker text for contrast */
+        }
+        #header {
+            background-color: rgba(255, 255, 255, 0.8); /* Slightly more opaque white for header */
+            backdrop-filter: blur(8px); /* Subtle blur for header */
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Existing shadow */
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            padding-top: 1rem; /* Adjust padding for visual balance */
+            padding-bottom: 1rem;
+        }
+        .header-text {
+            color: #1a202c; /* Darker text for header content */
+        }
+        .header-link {
+            color: #4a5568; /* Muted gray for links */
+            transition: color 0.3s ease;
+        }
+        .header-link:hover {
+            color: #2d3748; /* Darker gray on hover */
+        }
+
+        #about {
             /* Layer 1: Subtle clipart pattern (very light dots) */
             background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px),
                               /* Layer 2: Transparent color overlay (40% opaque to show 60% image) */
                               linear-gradient(to bottom right, rgba(224, 247, 250, 0.4), rgba(194, 233, 251, 0.4)),
                               /* Layer 3: Satellite image */
-                              url('https://s7d1.scene7.com/is/image/wbcollab/shutterstock_1769294429_2?qlt=90&fmt=webp&resMode=sharp2');
+                              url('https://i0.wp.com/spacenews.com/wp-content/uploads/2015/11/FLEX_ESA.jpg?fit=780%2C430&quality=89&ssl=1');
             
             background-size: 20px 20px, cover, cover; /* Sizes for each layer */
             background-position: center center, center center, center center;
             background-repeat: repeat, no-repeat, no-repeat;
-            background-attachment: fixed, fixed, fixed; /* All fixed for parallax-like effect */
-            color: #1a202c; /* Darker text for contrast */
+            background-attachment: scroll, scroll, scroll; /* Scroll with content */
+            padding-top: 3rem; /* Add some padding to the top and bottom */
+            padding-bottom: 3rem;
+            border-radius: 1.5rem; /* Rounded corners for the about section */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            margin-top: 2rem; /* Space from header */
         }
+        #about h1, #about p, #about a {
+            color: #ffffff; /* White text for readability on image background */
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Add text shadow for better readability */
+        }
+
+
         .timeline-item {
             position: relative;
             padding-left: 2rem;
@@ -193,9 +229,9 @@
 <body class="antialiased">
 
     <!-- Header & Navigation -->
-    <header id="header" class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
+    <header id="header" class="sticky top-0 z-50">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-gray-800 flex items-center gap-2">
+            <a href="#" class="text-2xl font-bold header-text flex items-center gap-2">
                 <img src="https://media.licdn.com/dms/image/v2/D5603AQF8CqLTT-6mLg/profile-displayphoto-crop_800_800/B56ZfDuE0KHUAM-/0/1751335327095?e=1755734400&v=beta&t=Qxs9306sKOckx3jhMPsnzPuRkNuIvSftD9v54RVonV4" alt="Logo" class="h-8 w-8 rounded-full shadow-sm"> <!-- Replace with your logo URL -->
                 Puspendu Biswas Paul
             </a>
@@ -227,15 +263,15 @@
         <!-- About Section -->
         <section id="about" class="mb-24 text-center">
             <img src="https://scontent-hkg1-2.xx.fbcdn.net/v/t39.30808-6/493334436_626215743752314_4712431554108028776_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=h-XpZfPF7s4Q7kNvwGwpZ_z&_nc_oc=AdnNFT4ivDOQJ9GSa_G_LGeRlbiCH8lq-4BlbR7CwbNPvXehlP4EmJPoC9kY3JRaz4w&_nc_zt=23&_nc_ht=scontent-hkg1-2.xx&_nc_gid=PxDIbNj-qWiB3Xk3OAJldg&oh=00_AfTeQNvY7BgcQZqCgYR3HF4yGQeSc_yi-qen89DoZw0vcw&oe=6880F736" alt="Puspendu Biswas Paul Profile Picture" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover shadow-xl border-4 border-cyan-300"> <!-- Replace with your profile picture URL -->
-            <h1 class="text-5xl md:text-6xl font-extrabold text-gray-800 mb-2 leading-tight">Puspendu Biswas Paul</h1>
-            <p class="max-w-4xl mx-auto text-lg text-gray-700">
+            <h1 class="text-5xl md:text-6xl font-extrabold header-text mb-2 leading-tight">Puspendu Biswas Paul</h1>
+            <p class="max-w-4xl mx-auto text-lg header-text">
                 A highly motivated and dedicated professional with a strong background in Synthetic Aperture Radar (SAR) data, Artificial Intelligence (AI), and remote sensing. Committed to leveraging advanced technologies to address complex geospatial challenges. Expertise includes developing AI-driven models for SAR data analysis, enabling enhanced environmental monitoring and disaster management.
             </p>
             <div class="mt-6 flex justify-center space-x-4">
-                <a href="mailto:puspendu.buaa@gmail.com" class="text-cyan-600 hover:text-cyan-700 transition duration-300">
+                <a href="mailto:puspendu.buaa@gmail.com" class="header-link hover:text-white transition duration-300">
                     <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6M20 6L12 11L4 6H20M20 18H4V8L12 13L20 8V18Z" /></svg>
                 </a>
-                <a href="https://www.linkedin.com/in/puspendubiswaspaul" target="_blank" class="text-cyan-600 hover:text-cyan-700 transition duration-300">
+                <a href="https://www.linkedin.com/in/puspendubiswaspaul" target="_blank" class="header-link hover:text-white transition duration-300">
                     <i class="fab fa-linkedin fa-2x"></i> <!-- Font Awesome LinkedIn icon -->
                 </a>
             </div>
