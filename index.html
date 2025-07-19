@@ -20,27 +20,52 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f8fafc;
+            background-color: #f0fdfa; /* Lighter teal background */
             color: #1e293b;
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .timeline-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
         }
         .timeline-item::before {
             content: '';
             position: absolute;
-            width: 1rem;
-            height: 1rem;
+            width: 1.25rem; /* Larger circle */
+            height: 1.25rem; /* Larger circle */
             border-radius: 50%;
-            left: -0.5rem;
-            top: 0.25rem;
+            left: -0.625rem; /* Center the larger circle */
+            top: 0.5rem; /* Adjust position */
             background-color: #0d9488;
-            border: 3px solid #f0fdfa;
+            border: 4px solid #f0fdfa; /* Thicker border */
+            z-index: 1;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: #a7f3d0; /* Lighter line color */
+            top: 1.25rem; /* Start below the circle */
+            bottom: -1rem; /* Extend below the item */
+            left: 0;
+        }
+        .timeline-item:last-child::after {
+            display: none; /* Hide line for the last item */
         }
         .nav-link.active {
             color: #0d9488;
             font-weight: 700;
+            border-bottom: 2px solid #0d9488;
+            padding-bottom: 0.25rem;
         }
         .download-fab {
             position: fixed;
@@ -55,12 +80,34 @@
             align-items: center;
             gap: 0.5rem;
             font-weight: 600;
-            transition: background-color 0.3s ease, transform 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
             z-index: 1000;
         }
         .download-fab:hover {
             background-color: #0f766e;
-            transform: translateY(-2px);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        .card-hover-effect {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        .filter-btn {
+            transition: all 0.2s ease-in-out;
+            border: 1px solid #d1d5db; /* Default border */
+        }
+        .filter-btn.active-filter {
+            background-color: #0d9488;
+            color: white;
+            border-color: #0d9488;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .filter-btn:not(.active-filter):hover {
+            background-color: #f0f9ff; /* Light blue on hover for inactive */
+            border-color: #67e8f9; /* Cyan border on hover */
         }
     </style>
 </head>
@@ -70,7 +117,7 @@
     <header id="header" class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="text-2xl font-bold text-teal-700 flex items-center gap-2">
-                <img src="https://scholar.googleusercontent.com/citations?view_op=medium_photo&user=L8kjjy8AAAAJ&citpid=1"> <!-- Replace with your logo URL -->
+                <img src="https://scholar.googleusercontent.com/citations?view_op=medium_photo&user=L8kjjy8AAAAJ&citpid=1" alt="Logo" class="h-8 w-8 rounded-full"> <!-- Replace with your logo URL -->
                 Puspendu Biswas Paul
             </a>
             <div class="hidden md:flex space-x-6">
@@ -102,7 +149,7 @@
 
         <!-- About Section -->
         <section id="about" class="mb-24 text-center">
-            <img src="https://scholar.googleusercontent.com/citations?view_op=medium_photo&user=L8kjjy8AAAAJ&citpid=1"> <!-- Replace with your profile picture URL -->
+            <img src="https://scontent-hkg1-2.xx.fbcdn.net/v/t39.30808-6/493334436_626215743752314_4712431554108028776_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=h-XpZfPF7s4Q7kNvwGwpZ_z&_nc_oc=AdnNFT4ivDOQJ9GSa_G_LGeRlbiCH8lq-4BlbR7CwbNPvXehlP4EmJPoC9kY3JRaz4w&_nc_zt=23&_nc_ht=scontent-hkg1-2.xx&_nc_gid=PxDIbNj-qWiB3Xk3OAJldg&oh=00_AfTeQNvY7BgcQZqCgYR3HF4yGQeSc_yi-qen89DoZw0vcw&oe=6880F736" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover shadow-lg border-4 border-teal-200"> <!-- Replace with your profile picture URL -->
             <h1 class="text-5xl md:text-6xl font-extrabold text-slate-800 mb-2 leading-tight">Puspendu Biswas Paul</h1>
             <p class="max-w-4xl mx-auto text-lg text-slate-600">
                 A highly motivated and dedicated professional with a strong background in Synthetic Aperture Radar (SAR) data, Artificial Intelligence (AI), and remote sensing. Committed to leveraging advanced technologies to address complex geospatial challenges. Expertise includes developing AI-driven models for SAR data analysis, enabling enhanced environmental monitoring and disaster management.
@@ -123,7 +170,7 @@
             <p class="text-lg text-slate-600 text-center mb-12">This section provides an overview of the key technical competencies, from programming languages and specialized software to data analysis and AI frameworks, that form the foundation of my professional expertise.</p>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Skill Card -->
-                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover-effect">
                     <h3 class="font-bold text-xl mb-3 text-teal-700">Languages & Databases</h3>
                     <div class="flex flex-wrap gap-2">
                         <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">Python</span>
@@ -133,7 +180,7 @@
                     </div>
                 </div>
                  <!-- Skill Card -->
-                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover-effect">
                     <h3 class="font-bold text-xl mb-3 text-teal-700">Data Analysis & AI</h3>
                      <div class="flex flex-wrap gap-2">
                         <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">Deep Learning</span>
@@ -144,7 +191,7 @@
                     </div>
                 </div>
                  <!-- Skill Card -->
-                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover-effect">
                     <h3 class="font-bold text-xl mb-3 text-teal-700">Remote Sensing & GIS</h3>
                      <div class="flex flex-wrap gap-2">
                         <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">ArcGIS Pro</span>
@@ -153,7 +200,7 @@
                     </div>
                 </div>
                  <!-- Skill Card -->
-                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover-effect">
                     <h3 class="font-bold text-xl mb-3 text-teal-700">Satellite & Engineering</h3>
                      <div class="flex flex-wrap gap-2">
                         <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full">SAR</span>
@@ -165,7 +212,7 @@
                     </div>
                 </div>
                  <!-- Skill Card -->
-                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover-effect">
                     <h3 class="font-bold text-xl mb-3 text-teal-700">Certifications</h3>
                     <ul class="list-disc list-inside text-slate-600">
                         <li>Data Visualization using Bokeh</li>
@@ -175,7 +222,7 @@
                     </ul>
                 </div>
                 <!-- IELTS Score Chart -->
-                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover-effect">
                     <h3 class="font-bold text-xl mb-3 text-teal-700">IELTS Score: 7.5 Overall</h3>
                     <div class="chart-container relative w-full h-64 md:h-64 max-w-sm mx-auto">
                         <canvas id="ieltsChart"></canvas>
@@ -207,11 +254,11 @@
             <h2 class="text-3xl font-bold text-center mb-2 text-slate-800">Publications</h2>
              <p class="text-lg text-slate-600 text-center mb-8">This section lists my scholarly contributions to the field. You can filter the publications by their current status to explore published works, articles under review, submitted papers, and ongoing research projects.</p>
             <div id="publication-filters" class="flex justify-center flex-wrap gap-2 mb-8">
-                <button data-filter="all" class="filter-btn bg-teal-600 text-white px-4 py-2 rounded-full font-semibold">All</button>
-                <button data-filter="Under Review" class="filter-btn bg-white text-slate-700 px-4 py-2 rounded-full font-semibold border border-slate-300 hover:bg-teal-50">Under Review</button>
-                <button data-filter="Submitted" class="filter-btn bg-white text-slate-700 px-4 py-2 rounded-full font-semibold border border-slate-300 hover:bg-teal-50">Submitted</button>
-                <button data-filter="Published" class="filter-btn bg-white text-slate-700 px-4 py-2 rounded-full font-semibold border border-slate-300 hover:bg-teal-50">Published</button>
-                <button data-filter="Ongoing" class="filter-btn bg-white text-slate-700 px-4 py-2 rounded-full font-semibold border border-slate-300 hover:bg-teal-50">Ongoing</button>
+                <button data-filter="all" class="filter-btn bg-teal-600 text-white px-4 py-2 rounded-full font-semibold active-filter">All</button>
+                <button data-filter="Under Review" class="filter-btn bg-white text-slate-700 px-4 py-2 rounded-full font-semibold">Under Review</button>
+                <button data-filter="Submitted" class="filter-btn bg-white text-slate-700 px-4 py-2 rounded-full font-semibold">Submitted</button>
+                <button data-filter="Published" class="filter-btn bg-white text-slate-700 px-4 py-2 rounded-full font-semibold">Published</button>
+                <button data-filter="Ongoing" class="filter-btn bg-white text-slate-700 px-4 py-2 rounded-full font-semibold">Ongoing</button>
             </div>
             <div id="publication-list" class="space-y-4">
                 <!-- Publication items will be injected here by JS -->
@@ -324,7 +371,7 @@
             const volunteeringContainer = document.querySelector('#volunteering .grid');
             volunteeringData.forEach(item => {
                 const card = document.createElement('div');
-                card.className = 'bg-white p-6 rounded-lg shadow-md';
+                card.className = 'bg-white p-6 rounded-lg shadow-md card-hover-effect';
                 card.innerHTML = `
                     <h3 class="font-bold text-xl mb-3 text-teal-700">${item.title}</h3>
                     <p class="font-semibold text-slate-600">${item.company}</p>
@@ -359,7 +406,7 @@
                 
                 filteredPublications.forEach(pub => {
                     const item = document.createElement('div');
-                    item.className = 'publication-item bg-white p-4 rounded-lg shadow-sm transition-all duration-300';
+                    item.className = 'publication-item bg-white p-4 rounded-lg shadow-sm transition-all duration-300 card-hover-effect';
                     item.setAttribute('data-category', pub.category);
                     item.innerHTML = `
                         <p class="text-slate-700">${pub.title}</p>
@@ -373,11 +420,9 @@
                 button.addEventListener('click', () => {
                     const filter = button.getAttribute('data-filter');
                     filterButtons.forEach(btn => {
-                        btn.classList.remove('bg-teal-600', 'text-white');
-                        btn.classList.add('bg-white', 'text-slate-700');
+                        btn.classList.remove('active-filter');
                     });
-                    button.classList.add('bg-teal-600', 'text-white');
-                    button.classList.remove('bg-white', 'text-slate-700');
+                    button.classList.add('active-filter');
                     displayPublications(filter);
                 });
             });
@@ -395,7 +440,7 @@
             const achievementsContainer = document.querySelector('#achievements .grid');
             achievementsData.forEach(item => {
                 const card = document.createElement('div');
-                card.className = `p-6 rounded-lg shadow-md ${item.type === 'academic' ? 'bg-blue-50' : 'bg-purple-50'}`;
+                card.className = `p-6 rounded-lg shadow-md card-hover-effect ${item.type === 'academic' ? 'bg-blue-50' : 'bg-purple-50'}`;
                 card.innerHTML = `
                     <h3 class="font-bold text-lg ${item.type === 'academic' ? 'text-blue-800' : 'text-purple-800'} mb-2">${item.title}</h3>
                     <p class="text-slate-600">${item.description}</p>
@@ -412,7 +457,7 @@
             const referencesContainer = document.querySelector('#contact .grid');
             referencesData.forEach(item => {
                 const card = document.createElement('div');
-                card.className = 'bg-slate-50 p-6 rounded-lg';
+                card.className = 'bg-slate-50 p-6 rounded-lg shadow-md card-hover-effect';
                 card.innerHTML = `
                     <h3 class="font-bold text-lg text-slate-800">${item.name}</h3>
                     <p class="text-slate-600 italic">${item.title}</p>
