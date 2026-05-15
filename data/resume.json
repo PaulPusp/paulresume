@@ -1,0 +1,15 @@
+{
+  "name": "Puspendu Biswas Paul",
+  "headline": "Remote Sensing & Geospatial AI Researcher",
+  "location": "Hangzhou, China",
+  "email": "puspendu.buaa@gmail.com",
+  "github": "https://github.com/PaulPusp",
+  "focus": [
+    "Sentinel-1 SAR flood mapping",
+    "DEM validation",
+    "Python geospatial automation",
+    "Environmental-risk decision support",
+    "AI-enabled remote sensing workflows"
+  ],
+  "note": "Human-readable source of the public website content. Main layout is in index.html."
+}

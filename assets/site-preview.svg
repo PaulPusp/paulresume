@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07111f"/>
+      <stop offset="0.55" stop-color="#0c1c30"/>
+      <stop offset="1" stop-color="#113d4a"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#50e3c2"/>
+      <stop offset="1" stop-color="#ffcf5a"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="970" cy="120" r="260" fill="#70a8ff" opacity="0.18"/>
+  <circle cx="160" cy="520" r="260" fill="#50e3c2" opacity="0.18"/>
+  <path d="M0 440 C220 330 360 500 560 390 C760 280 920 320 1200 210" fill="none" stroke="#50e3c2" stroke-width="4" opacity="0.45"/>
+  <circle cx="168" cy="188" r="76" fill="url(#accent)"/>
+  <text x="168" y="210" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="54" font-weight="900" fill="#07111f">PB</text>
+  <text x="270" y="178" font-family="Inter, Arial, sans-serif" font-size="58" font-weight="900" fill="#e8f3ff">Puspendu Biswas Paul</text>
+  <text x="270" y="240" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="700" fill="#50e3c2">Remote Sensing &amp; Geospatial AI Researcher</text>
+  <text x="270" y="310" font-family="Inter, Arial, sans-serif" font-size="28" fill="#a6b7cb">SAR flood mapping · DEM validation · Python automation · Environmental risk decision support</text>
+  <rect x="270" y="385" width="650" height="78" rx="39" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.18)"/>
+  <text x="305" y="434" font-family="Inter, Arial, sans-serif" font-size="25" fill="#e8f3ff">Built for recruiters looking for applied geospatial R&amp;D talent</text>
+</svg>
