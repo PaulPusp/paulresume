@@ -219,6 +219,17 @@ p { color: var(--muted); line-height: 1.7; }
   background: linear-gradient(135deg, var(--accent), var(--accent-3)); color: #07111f; font-size: 46px; font-weight: 950;
   box-shadow: 0 28px 70px rgba(80,227,194,.22);
 }
+.avatar.profile-photo {
+  display: block;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  padding: 4px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-3));
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow: 0 28px 70px rgba(80, 227, 194, 0.28);
+}
 .ring { position: absolute; border: 1px solid rgba(255,255,255,.28); border-radius: 50%; animation: spin 18s linear infinite; }
 .ring::after { content: ""; position: absolute; width: 12px; height: 12px; background: var(--accent); border-radius: 50%; top: 18%; left: 10%; }
 .ring-a { width: 230px; height: 230px; }
