@@ -355,6 +355,7 @@ const languageSelect = document.querySelector('#language-select');
 const chineseTimeZones = new Set(['Asia/Shanghai', 'Asia/Chongqing', 'Asia/Harbin', 'Asia/Urumqi', 'Asia/Hong_Kong', 'Asia/Macau']);
 const frenchTimeZones = new Set(['Europe/Paris', 'Europe/Monaco', 'America/Martinique', 'America/Guadeloupe', 'America/Cayenne', 'Indian/Reunion', 'Indian/Mayotte', 'Pacific/Noumea', 'Pacific/Tahiti']);
 let currentLanguage = 'en';
+let projectDetailsReady = false;
 
 function detectVisitorLanguage() {
   const storedLanguage = localStorage.getItem('preferredLanguage');
@@ -402,7 +403,7 @@ function applyLanguage(language) {
     element.innerHTML = t(key);
   });
   if (languageSelect) languageSelect.value = currentLanguage;
-  if (typeof projectDetails !== 'undefined') translateProjectDetails();
+  if (projectDetailsReady) translateProjectDetails();
 }
 
 const storedTheme = localStorage.getItem('theme');
@@ -514,6 +515,7 @@ const projectDetails = {
   }
 };
 
+projectDetailsReady = true;
 translateProjectDetails();
 
 const modal = document.querySelector('.project-modal');
