@@ -40,45 +40,53 @@
       <span class="brand-mark">PB</span>
       <span>
         <strong>Puspendu Biswas Paul</strong>
-        <small>Geospatial AI · SAR · Risk Mapping</small>
+        <small data-i18n="brand.subtitle">Geospatial AI · SAR · Risk Mapping</small>
       </span>
     </a>
     <nav class="desktop-nav" aria-label="Primary navigation">
-      <a href="#work">Work</a>
-      <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-      <a href="#publications">Publications</a>
-      <a href="#contact">Contact</a>
+      <a href="#work" data-i18n="nav.work">Work</a>
+      <a href="#skills" data-i18n="nav.skills">Skills</a>
+      <a href="#projects" data-i18n="nav.projects">Projects</a>
+      <a href="#publications" data-i18n="nav.publications">Publications</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
     </nav>
     <div class="top-actions">
+      <label class="language-switcher" aria-label="Select language">
+        <span class="sr-only">Language</span>
+        <select id="language-select" aria-label="Select language">
+          <option value="en">EN</option>
+          <option value="zh">中文</option>
+          <option value="fr">FR</option>
+        </select>
+      </label>
       <button class="theme-toggle" type="button" aria-label="Toggle dark and light theme">◐</button>
       <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
     </div>
   </header>
 
   <nav class="mobile-nav" aria-label="Mobile navigation">
-    <a href="#work">Work</a>
-    <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
-    <a href="#publications">Publications</a>
-    <a href="#contact">Contact</a>
+    <a href="#work" data-i18n="nav.work">Work</a>
+    <a href="#skills" data-i18n="nav.skills">Skills</a>
+    <a href="#projects" data-i18n="nav.projects">Projects</a>
+    <a href="#publications" data-i18n="nav.publications">Publications</a>
+    <a href="#contact" data-i18n="nav.contact">Contact</a>
   </nav>
 
   <main id="main">
     <section class="hero section" id="home">
       <div class="hero-copy reveal">
-        <p class="eyebrow">Remote Sensing & Geospatial AI Researcher · Hangzhou, China</p>
-        <h1>Turning Earth observation data into environmental insight.</h1>
-        <p class="hero-lede">I combine remote sensing, GIS, Python automation, and AI/ML workflows to transform satellite, terrain, and climate data into practical outputs for research, planning, risk analysis, and decision support.</p>
+        <p class="eyebrow" data-i18n="hero.eyebrow">Remote Sensing & Geospatial AI Researcher · Hangzhou, China</p>
+        <h1 data-i18n="hero.title">Turning Earth observation data into environmental insight.</h1>
+        <p class="hero-lede" data-i18n="hero.lede">I combine remote sensing, GIS, Python automation, and AI/ML workflows to transform satellite, terrain, and climate data into practical outputs for research, planning, risk analysis, and decision support.</p>
         <div class="hero-actions">
-          <a class="btn primary" href="mailto:puspendu.buaa@gmail.com?subject=Geospatial%20AI%20Opportunity%20for%20Puspendu">Contact me</a>
-          <a class="btn secondary" href="https://github.com/PaulPusp" target="_blank" rel="noreferrer">GitHub</a>
-          <button class="btn ghost" type="button" data-print>Print profile</button>
+          <a class="btn primary" href="mailto:puspendu.buaa@gmail.com?subject=Geospatial%20AI%20Opportunity%20for%20Puspendu" data-i18n="button.contact">Contact me</a>
+          <a class="btn secondary" href="https://github.com/PaulPusp" target="_blank" rel="noreferrer" data-i18n="contact.github">GitHub</a>
+          <button class="btn ghost" type="button" data-print data-i18n="button.print">Print profile</button>
         </div>
         <div class="trust-strip" aria-label="Career highlights">
-          <span><strong>CSC</strong> Scholarship</span>
-          <span><strong>IELTS</strong> 7.5</span>
-          <span><strong>Tools</strong> Python · GEE · ArcGIS · PyTorch</span>
+          <span data-i18n-html="trust.csc"><strong>CSC</strong> Scholarship</span>
+          <span data-i18n-html="trust.ielts"><strong>IELTS</strong> 7.5</span>
+          <span data-i18n-html="trust.tools"><strong>Tools</strong> Python · GEE · ArcGIS · PyTorch</span>
         </div>
       </div>
       <aside class="hero-panel reveal" aria-label="Profile summary card">
@@ -88,12 +96,12 @@
             <span class="ring ring-a"></span>
             <span class="ring ring-b"></span>
           </div>
-          <h2>Applied geospatial researcher</h2>
-          <p>Focused on flood-risk intelligence, DEM suitability, SAR feature stacks, and stakeholder-facing spatial outputs.</p>
+          <h2 data-i18n="hero.card.title">Applied geospatial researcher</h2>
+          <p data-i18n="hero.card.body">Focused on flood-risk intelligence, DEM suitability, SAR feature stacks, and stakeholder-facing spatial outputs.</p>
           <dl class="mini-stats">
-            <div><dt>Core domain</dt><dd>Remote Sensing & GIS</dd></div>
-            <div><dt>Main sensors/data</dt><dd>Sentinel-1 SAR · DEM · Climate</dd></div>
-            <div><dt>Research direction</dt><dd>AI-enabled environmental decision support</dd></div>
+            <div><dt data-i18n="mini.core.label">Core domain</dt><dd data-i18n="mini.core.value">Remote Sensing & GIS</dd></div>
+            <div><dt data-i18n="mini.sensor.label">Main sensors/data</dt><dd data-i18n="mini.sensor.value">Sentinel-1 SAR · DEM · Climate</dd></div>
+            <div><dt data-i18n="mini.research.label">Research direction</dt><dd data-i18n="mini.research.value">AI-enabled environmental decision support</dd></div>
           </dl>
         </div>
       </aside>
@@ -107,20 +115,20 @@
 
     <section class="section split" id="about">
       <div class="section-heading reveal">
-        <p class="eyebrow">Profile</p>
-        <h2>Not just a GIS operator — a workflow builder.</h2>
+        <p class="eyebrow" data-i18n="about.eyebrow">Profile</p>
+        <h2 data-i18n="about.title">Remote sensing, AI, and GIS as one connected workflow.</h2>
       </div>
       <div class="body-card reveal">
-        <p>My work sits between remote sensing research and practical decision support. I integrate Sentinel-1 SAR, terrain, climate, and GIS datasets using ArcGIS Pro, Google Earth Engine, SNAP, Python, and PyTorch to produce flood-risk, environmental-risk, and local planning outputs.</p>
-        <p>The strongest part of my profile is not one software name. It is the full chain: data cleaning → feature-stack preparation → model comparison → flood/depth products → parcel/building/owner-level interpretation → clear maps and reports for users who need decisions, not raw rasters.</p>
+        <p data-i18n="about.p1">My work sits between remote sensing research and practical decision support. I integrate Sentinel-1 SAR, terrain, climate, and GIS datasets using ArcGIS Pro, Google Earth Engine, SNAP, Python, and PyTorch to produce flood-risk, environmental-risk, and local planning outputs.</p>
+        <p data-i18n="about.p2">My work follows the full analytical chain: data cleaning → feature-stack preparation → model comparison → environmental-risk products → local-scale interpretation → clear maps and reports for research, planning, and decision support.</p>
       </div>
     </section>
 
     <section class="section" id="work">
       <div class="section-heading centered reveal">
-        <p class="eyebrow">Experience</p>
-        <h2>Research and professional path</h2>
-        <p>Built around environmental risk, flood mapping, and decision-support geospatial analysis.</p>
+        <p class="eyebrow" data-i18n="work.eyebrow">Experience</p>
+        <h2 data-i18n="work.title">Research and professional path</h2>
+        <p data-i18n="work.lede">Built around environmental risk, flood mapping, and decision-support geospatial analysis.</p>
       </div>
       <div class="timeline" aria-label="Professional timeline">
         <article class="timeline-item reveal">
@@ -128,7 +136,7 @@
           <div>
             <h3>Scientific Officer <em>Part-time</em></h3>
             <p class="place">International Innovation Institute, Beihang University · Hangzhou, China</p>
-            <p>Developed local-scale flood-information workflows using Sentinel-1 SAR, DEMs, Python, ArcGIS Pro, Google Earth Engine, and PyTorch. Compared Attention U-Net and DeepLabV3+ flood-segmentation workflows and translated outputs into parcel/building/owner-level impact layers.</p>
+            <p data-i18n="exp.scientific.body">Developed local-scale flood-information workflows using Sentinel-1 SAR, DEMs, Python, ArcGIS Pro, Google Earth Engine, and PyTorch. Compared Attention U-Net and DeepLabV3+ flood-segmentation workflows and translated outputs into parcel/building/owner-level impact layers.</p>
           </div>
         </article>
         <article class="timeline-item reveal">
@@ -136,31 +144,31 @@
           <div>
             <h3>Research Member <em>Voluntary</em></h3>
             <p class="place">Hydro-Climate & Ocean Research Centre · Dhaka, Bangladesh</p>
-            <p>Support GIS mapping, spatial analysis, coastal-hazard thinking, GNSS-R applications, climate-induced risk analysis, and early-warning research planning.</p>
+            <p data-i18n="exp.member.body">Support GIS mapping, spatial analysis, coastal-hazard thinking, GNSS-R applications, climate-induced risk analysis, and early-warning research planning.</p>
           </div>
         </article>
         <article class="timeline-item reveal">
           <span class="time">Jan 2024 — Aug 2024</span>
           <div>
-            <h3>Geospatial Officer</h3>
+            <h3 data-i18n="role.geospatial_officer">Geospatial Officer</h3>
             <p class="place">Science Connect Ltd. · Dhaka, Bangladesh</p>
-            <p>Worked on land-elevation assessment and low-lying flood-susceptibility projects. Prepared geospatial datasets, spatial layers, terrain analysis, maps, and analytical outputs for environmental-risk reporting.</p>
+            <p data-i18n="exp.officer.body">Worked on land-elevation assessment and low-lying flood-susceptibility projects. Prepared geospatial datasets, spatial layers, terrain analysis, maps, and analytical outputs for environmental-risk reporting.</p>
           </div>
         </article>
         <article class="timeline-item reveal">
           <span class="time">Aug 2023 — Dec 2023</span>
           <div>
-            <h3>Disaster Mitigation & Spatial Data Intern</h3>
+            <h3 data-i18n="role.intern">Disaster Mitigation & Spatial Data Intern</h3>
             <p class="place">RIMES Bangladesh Satellite Office · Dhaka, Bangladesh</p>
-            <p>Supported disaster-preparedness and multi-hazard early-warning workflows through GIS data preparation, risk-analysis assistance, and stakeholder-oriented mapping outputs.</p>
+            <p data-i18n="exp.intern.body">Supported disaster-preparedness and multi-hazard early-warning workflows through GIS data preparation, risk-analysis assistance, and stakeholder-oriented mapping outputs.</p>
           </div>
         </article>
         <article class="timeline-item reveal">
           <span class="time">Mar 2021 — Jan 2023</span>
           <div>
-            <h3>Research Assistant</h3>
+            <h3 data-i18n="role.assistant">Research Assistant</h3>
             <p class="place">Sylhet Agricultural University · Sylhet, Bangladesh</p>
-            <p>Managed drought-index datasets, statistical analysis, research documentation, laboratory support, and early environmental modelling work.</p>
+            <p data-i18n="exp.assistant.body">Managed drought-index datasets, statistical analysis, research documentation, laboratory support, and early environmental modelling work.</p>
           </div>
         </article>
       </div>
@@ -169,101 +177,101 @@
     <section class="section education-grid">
       <article class="education-card reveal">
         <span class="tag">Expected June 2026</span>
-        <h3>M.S. Space Technology Applications</h3>
+        <h3 data-i18n="edu.ms.title">M.S. Space Technology Applications</h3>
         <p>Beihang University, China</p>
-        <small>Research focus: AI-enabled flood information, Sentinel-1 SAR flood mapping, DEM validation, multi-sensor hydrological analysis, and parcel-level flood-risk interpretation.</small>
+        <small data-i18n="edu.ms.body">Research focus: AI-enabled flood information, Sentinel-1 SAR flood mapping, DEM validation, multi-sensor hydrological analysis, and parcel-level flood-risk interpretation.</small>
       </article>
       <article class="education-card reveal">
         <span class="tag">2018 — 2023</span>
-        <h3>B.Sc. Agricultural Engineering</h3>
+        <h3 data-i18n="edu.bs.title">B.Sc. Agricultural Engineering</h3>
         <p>Sylhet Agricultural University, Bangladesh</p>
-        <small>Final thesis: Prediction of Drought Index Using Advanced Fuzzy-Logic Model.</small>
+        <small data-i18n="edu.bs.body">Final thesis: Prediction of Drought Index Using Advanced Fuzzy-Logic Model.</small>
       </article>
       <article class="education-card reveal">
         <span class="tag">Award</span>
-        <h3>Chinese Government Scholarship</h3>
+        <h3 data-i18n="edu.csc.title">Chinese Government Scholarship</h3>
         <p>CSC Scholarship, 2024</p>
-        <small>Graduate study support for research in space technology applications and remote sensing.</small>
+        <small data-i18n="edu.csc.body">Graduate study support for research in space technology applications and remote sensing.</small>
       </article>
     </section>
 
     <section class="section" id="skills">
       <div class="section-heading centered reveal">
-        <p class="eyebrow">Skill stack</p>
-        <h2>Technical capabilities for geospatial research, automation, and decision support</h2>
+        <p class="eyebrow" data-i18n="skills.eyebrow">Skill stack</p>
+        <h2 data-i18n="skills.title">Technical capabilities for geospatial research, automation, and decision support</h2>
       </div>
       <div class="skill-board">
         <article class="skill-card reveal">
-          <h3>Geospatial & Remote Sensing</h3>
-          <p>ArcGIS Pro, QGIS, Google Earth Engine, SNAP/Sentinel-1 Toolbox, Sentinel-1 SAR, optical imagery, raster/vector analysis, DEM validation, exposure mapping, geodatabase design.</p>
+          <h3 data-i18n="skill.geo.title">Geospatial & Remote Sensing</h3>
+          <p data-i18n="skill.geo.body">ArcGIS Pro, QGIS, Google Earth Engine, SNAP/Sentinel-1 Toolbox, Sentinel-1 SAR, optical imagery, raster/vector analysis, DEM validation, exposure mapping, geodatabase design.</p>
         </article>
         <article class="skill-card reveal">
-          <h3>Python Geospatial Automation</h3>
-          <p>Raster/vector batch processing, SAR feature-stack preparation, geospatial data cleaning, spatial overlay automation, reproducible notebook workflows, pandas, GeoPandas, Rasterio, Xarray, NumPy.</p>
+          <h3 data-i18n="skill.python.title">Python Geospatial Automation</h3>
+          <p data-i18n="skill.python.body">Raster/vector batch processing, SAR feature-stack preparation, geospatial data cleaning, spatial overlay automation, reproducible notebook workflows, pandas, GeoPandas, Rasterio, Xarray, NumPy.</p>
         </article>
         <article class="skill-card reveal">
-          <h3>Machine Learning & AI</h3>
-          <p>PyTorch, CNN concepts, Attention U-Net, DeepLabV3+, semantic segmentation, image classification, fuzzy-logic modelling, feature engineering, model comparison.</p>
+          <h3 data-i18n="skill.ml.title">Machine Learning & AI</h3>
+          <p data-i18n="skill.ml.body">PyTorch, CNN concepts, Attention U-Net, DeepLabV3+, semantic segmentation, image classification, fuzzy-logic modelling, feature engineering, model comparison.</p>
         </article>
         <article class="skill-card reveal">
-          <h3>Climate & Environmental Risk</h3>
-          <p>Flood/drought indicators, rainfall-event interpretation, terrain/elevation analysis, environmental variable integration, early-warning and risk-map production.</p>
+          <h3 data-i18n="skill.risk.title">Climate & Environmental Risk</h3>
+          <p data-i18n="skill.risk.body">Flood/drought indicators, rainfall-event interpretation, terrain/elevation analysis, environmental variable integration, early-warning and risk-map production.</p>
         </article>
         <article class="skill-card reveal">
-          <h3>Research & Reporting</h3>
-          <p>Data-quality checks, sampling design support, accuracy assessment, statistical tables, publication figures, technical reports, manuscripts, conference materials.</p>
+          <h3 data-i18n="skill.report.title">Research & Reporting</h3>
+          <p data-i18n="skill.report.body">Data-quality checks, sampling design support, accuracy assessment, statistical tables, publication figures, technical reports, manuscripts, conference materials.</p>
         </article>
         <article class="skill-card reveal">
-          <h3>AI-Assisted Work Efficiency</h3>
-          <p>AI-assisted coding, debugging, literature screening, technical writing, data-quality checking, workflow planning, and research-output polishing for remote sensing/GIS analysis.</p>
+          <h3 data-i18n="skill.ai.title">AI-Assisted Work Efficiency</h3>
+          <p data-i18n="skill.ai.body">AI-assisted coding, debugging, literature screening, technical writing, data-quality checking, workflow planning, and research-output polishing for remote sensing/GIS analysis.</p>
         </article>
       </div>
     </section>
 
     <section class="section" id="projects">
       <div class="section-heading centered reveal">
-        <p class="eyebrow">Selected projects</p>
-        <h2>Selected work across Earth observation, environmental risk, and applied AI</h2>
-        <p>Each project is written as a recruiter should read it: problem, method, and output.</p>
+        <p class="eyebrow" data-i18n="projects.eyebrow">Selected projects</p>
+        <h2 data-i18n="projects.title">Selected work across Earth observation, environmental risk, and applied AI</h2>
+        <p data-i18n="projects.lede">Projects are organized by analytical problem, method, dataset, and practical output.</p>
       </div>
       <div class="project-grid">
         <article class="project-card feature reveal" data-project="flood">
-          <div class="project-top"><span>Flood Intelligence</span><button type="button">Details</button></div>
-          <h3>Flood extent and depth mapping in Bangladesh</h3>
-          <p>Multi-stage workflow combining Sentinel-1 SAR, Attention U-Net, DEM assessment, FwDET depth estimation, and parcel-level GIS impact interpretation.</p>
-          <ul><li>SAR before/after feature stacks</li><li>Deep learning flood segmentation</li><li>Depth and exposure translation</li></ul>
+          <div class="project-top"><span data-i18n="project.flood.kicker">Flood Intelligence</span><button type="button" data-i18n="button.details">Details</button></div>
+          <h3 data-i18n="project.flood.title">Flood extent and depth mapping in Bangladesh</h3>
+          <p data-i18n="project.flood.body">Multi-stage workflow combining Sentinel-1 SAR, Attention U-Net, DEM assessment, FwDET depth estimation, and parcel-level GIS impact interpretation.</p>
+          <ul><li data-i18n="project.flood.p1">SAR before/after feature stacks</li><li data-i18n="project.flood.p2">Deep learning flood segmentation</li><li data-i18n="project.flood.p3">Depth and exposure translation</li></ul>
         </article>
         <article class="project-card reveal" data-project="dem">
-          <div class="project-top"><span>Terrain Reliability</span><button type="button">Details</button></div>
-          <h3>DEM validation for Jamuna floodplain</h3>
-          <p>Assessed open-access DEMs using water- and land-domain reference data, bootstrapped uncertainty, and decision-oriented ranking for hydrological suitability.</p>
-          <ul><li>DEM error metrics</li><li>Water/land validation</li><li>Flood-depth suitability support</li></ul>
+          <div class="project-top"><span data-i18n="project.dem.kicker">Terrain Reliability</span><button type="button" data-i18n="button.details">Details</button></div>
+          <h3 data-i18n="project.dem.title">DEM validation for Jamuna floodplain</h3>
+          <p data-i18n="project.dem.body">Assessed open-access DEMs using water- and land-domain reference data, bootstrapped uncertainty, and decision-oriented ranking for hydrological suitability.</p>
+          <ul><li data-i18n="project.dem.p1">DEM error metrics</li><li data-i18n="project.dem.p2">Water/land validation</li><li data-i18n="project.dem.p3">Flood-depth suitability support</li></ul>
         </article>
         <article class="project-card reveal" data-project="grace">
-          <div class="project-top"><span>Hydroclimate</span><button type="button">Details</button></div>
-          <h3>GRACE-based drought-storage dynamics</h3>
-          <p>Processed GRACE/GRACE-FO and climate datasets to analyze terrestrial-water storage behavior using machine-learning classification logic.</p>
-          <ul><li>Storage-drought response</li><li>Climate dataset processing</li><li>Hydrological pattern analysis</li></ul>
+          <div class="project-top"><span data-i18n="project.grace.kicker">Hydroclimate</span><button type="button" data-i18n="button.details">Details</button></div>
+          <h3 data-i18n="project.grace.title">GRACE-based drought-storage dynamics</h3>
+          <p data-i18n="project.grace.body">Processed GRACE/GRACE-FO and climate datasets to analyze terrestrial-water storage behavior using machine-learning classification logic.</p>
+          <ul><li data-i18n="project.grace.p1">Storage-drought response</li><li data-i18n="project.grace.p2">Climate dataset processing</li><li data-i18n="project.grace.p3">Hydrological pattern analysis</li></ul>
         </article>
         <article class="project-card reveal" data-project="fish">
-          <div class="project-top"><span>AI Dataset</span><button type="button">Details</button></div>
-          <h3>BD freshwater fish image dataset</h3>
-          <p>Contributed to AI-powered automatic fish species classification/detection work supporting smart aquaculture and environmental data applications.</p>
-          <ul><li>Image dataset contribution</li><li>Classification/detection support</li><li>Smart aquaculture context</li></ul>
+          <div class="project-top"><span data-i18n="project.fish.kicker">AI Dataset</span><button type="button" data-i18n="button.details">Details</button></div>
+          <h3 data-i18n="project.fish.title">BD freshwater fish image dataset</h3>
+          <p data-i18n="project.fish.body">Contributed to AI-powered automatic fish species classification/detection work supporting smart aquaculture and environmental data applications.</p>
+          <ul><li data-i18n="project.fish.p1">Image dataset contribution</li><li data-i18n="project.fish.p2">Classification/detection support</li><li data-i18n="project.fish.p3">Smart aquaculture context</li></ul>
         </article>
       </div>
     </section>
 
     <section class="section" id="publications">
       <div class="section-heading centered reveal">
-        <p class="eyebrow">Publications</p>
-        <h2>Research outputs and manuscripts</h2>
+        <p class="eyebrow" data-i18n="nav.publications">Publications</p>
+        <h2 data-i18n="pub.title">Research outputs and manuscripts</h2>
       </div>
       <div class="filters reveal" role="group" aria-label="Publication filters">
-        <button class="active" type="button" data-filter="all">All</button>
-        <button type="button" data-filter="published">Published</button>
-        <button type="button" data-filter="proceeding">Proceeding</button>
-        <button type="button" data-filter="manuscript">Manuscript</button>
+        <button class="active" type="button" data-filter="all" data-i18n="filter.all">All</button>
+        <button type="button" data-filter="published" data-i18n="filter.published">Published</button>
+        <button type="button" data-filter="proceeding" data-i18n="filter.proceeding">Proceeding</button>
+        <button type="button" data-filter="manuscript" data-i18n="filter.manuscript">Manuscript</button>
       </div>
       <div class="publication-list">
         <article class="publication reveal" data-category="proceeding">
@@ -277,7 +285,7 @@
           <a href="https://doi.org/10.1109/iSES52644.2021.00064" target="_blank" rel="noreferrer">DOI: 10.1109/iSES52644.2021.00064</a>
         </article>
         <article class="publication reveal" data-category="published">
-          <span>Published</span>
+          <span data-i18n="filter.published">Published</span>
           <h3>Impact of water pollution on physio-chemical properties for fish habitat in the Surma River, Sylhet city, Bangladesh</h3>
           <a href="https://doi.org/10.52293/WES.2025.1.1042" target="_blank" rel="noreferrer">DOI: 10.52293/WES.2025.1.1042</a>
         </article>
@@ -287,35 +295,37 @@
           <a href="https://doi.org/10.1016/j.dib.2024.111132" target="_blank" rel="noreferrer">DOI: 10.1016/j.dib.2024.111132</a>
         </article>
         <article class="publication reveal" data-category="manuscript">
-          <span>Ongoing manuscript</span>
+          <span data-i18n="pub.ongoing">Ongoing manuscript</span>
           <h3>Hydrologic suitability assessment of global DEMs in the Jamuna floodplain using remote-sensing-driven water and river metrics</h3>
-          <p>Manuscript in progress.</p>
+          <p data-i18n="pub.manuscript.note">Manuscript in progress.</p>
         </article>
       </div>
     </section>
 
     <section class="section impact-section">
       <div class="impact-card reveal">
-        <p class="eyebrow">Professional focus</p>
-        <h2>I can connect code, satellite data, and ground-level decisions.</h2>
+        <p class="eyebrow" data-i18n="impact.eyebrow">Professional focus</p>
+        <h2 data-i18n="impact.title">Connecting satellite data, modelling, and decision support.</h2>
+        <p data-i18n="impact.body">My work combines remote sensing, geospatial automation, AI/ML, and environmental analysis to create reproducible workflows and clear outputs for research, planning, early warning, and operational decision-making.</p>
+      </div>
     </section>
 
     <section class="section" id="contact">
       <div class="contact-grid">
         <div class="contact-copy reveal">
-          <p class="eyebrow">Contact</p>
-          <h2>Open to geospatial AI, remote sensing R&D, environmental analytics, and decision-support roles.</h2>
-          <p>I am open to research, R&D, and applied geospatial roles where satellite data, AI, and local risk interpretation matter.</p>
+          <p class="eyebrow" data-i18n="nav.contact">Contact</p>
+          <h2 data-i18n="contact.title">Open to geospatial AI, remote sensing R&D, environmental analytics, and decision-support roles.</h2>
+          <p data-i18n="contact.body">I am interested in roles that connect satellite data, AI/ML, Python automation, and applied environmental or risk analysis.</p>
         </div>
         <div class="contact-card reveal">
-          <a class="contact-line" href="mailto:puspendu.buaa@gmail.com"><span>Email</span><strong>puspendu.buaa@gmail.com</strong></a>
-          <a class="contact-line" href="https://github.com/PaulPusp" target="_blank" rel="noreferrer"><span>GitHub</span><strong>github.com/PaulPusp</strong></a>
-          <a class="contact-line" href="https://www.linkedin.com/in/puspendubiswaspaul/" target="_blank" rel="noreferrer"><span>LinkedIn</span><strong>linkedin.com/in/puspendubiswaspaul</strong></a>
-          <button class="copy-email" type="button" data-copy="puspendu.buaa@gmail.com">Copy email</button>
+          <a class="contact-line" href="mailto:puspendu.buaa@gmail.com"><span data-i18n="contact.email">Email</span><strong>puspendu.buaa@gmail.com</strong></a>
+          <a class="contact-line" href="https://github.com/PaulPusp" target="_blank" rel="noreferrer"><span data-i18n="contact.github">GitHub</span><strong>github.com/PaulPusp</strong></a>
+          <a class="contact-line" href="https://www.linkedin.com/in/puspendubiswaspaul/" target="_blank" rel="noreferrer"><span data-i18n="contact.linkedin">LinkedIn</span><strong>linkedin.com/in/puspendubiswaspaul</strong></a>
+          <button class="copy-email" type="button" data-copy="puspendu.buaa@gmail.com" data-i18n="contact.copy">Copy email</button>
         </div>
       </div>
       <div class="references reveal">
-        <h3>References</h3>
+        <h3 data-i18n="refs.title">References</h3>
         <p>Prof. Sheikh Tawhidul Islam — International Innovation Institute, Beihang University.</p>
         <p>Dr. Mohan Kumar Das — Executive Director, Hydro-Climate and Ocean Centre, Dhaka, Bangladesh.</p>
       </div>

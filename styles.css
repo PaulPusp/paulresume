@@ -132,7 +132,33 @@ button { font: inherit; }
   transition: color .2s ease, background .2s ease;
 }
 .desktop-nav a:hover, .desktop-nav a.active, .mobile-nav a:hover { color: var(--text); background: var(--card); }
-.top-actions { display: flex; gap: 8px; }
+.top-actions { display: flex; gap: 8px; align-items: center; }
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.language-switcher { display: inline-flex; align-items: center; }
+.language-switcher select {
+  height: 44px;
+  min-width: 78px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--text);
+  background: var(--card);
+  outline: none;
+  cursor: pointer;
+}
+.language-switcher select:focus { border-color: rgba(80, 227, 194, .65); }
+[data-theme="light"] .language-switcher select { background: rgba(255,255,255,.86); }
+
 .theme-toggle, .menu-toggle, .modal-close {
   border: 1px solid var(--line);
   background: var(--card);
@@ -221,14 +247,9 @@ p { color: var(--muted); line-height: 1.7; }
 }
 .avatar.profile-photo {
   display: block;
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
   object-fit: cover;
   padding: 4px;
-  background: linear-gradient(135deg, var(--accent), var(--accent-3));
   border: 1px solid rgba(255, 255, 255, 0.45);
-  box-shadow: 0 28px 70px rgba(80, 227, 194, 0.28);
 }
 .ring { position: absolute; border: 1px solid rgba(255,255,255,.28); border-radius: 50%; animation: spin 18s linear infinite; }
 .ring::after { content: ""; position: absolute; width: 12px; height: 12px; background: var(--accent); border-radius: 50%; top: 18%; left: 10%; }
