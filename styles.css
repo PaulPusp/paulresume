@@ -50,6 +50,23 @@
   }
 }
 
+/* Light/contrast mode readability fix.
+   The original bright yellow works on dark backgrounds but becomes weak on the pale theme.
+*/
+[data-theme="light"] .time {
+  color: #7a4b00;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+[data-theme="light"] .timeline::before,
+[data-theme="light"] .timeline:before {
+  background: rgba(7, 17, 31, 0.22);
+}
+
+[data-theme="light"] .timeline-item > div {
+  background: rgba(255, 255, 255, 0.86);
+}
+
 @media (max-width: 640px) {
   .avatar-orbit::before {
     width: 148px;
