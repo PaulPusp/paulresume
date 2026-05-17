@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="orbiting rocket">
+  <defs>
+    <linearGradient id="body" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#f8fbff"/><stop offset="1" stop-color="#a8bdc7"/></linearGradient>
+    <linearGradient id="blue" x1="0" x2="1"><stop offset="0" stop-color="#244cff"/><stop offset="1" stop-color="#1522a8"/></linearGradient>
+    <linearGradient id="fire" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#fff36b"/><stop offset=".55" stop-color="#ff8a1f"/><stop offset="1" stop-color="#ff3d00"/></linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="8" stdDeviation="5" flood-color="#000" flood-opacity=".28"/></filter>
+  </defs>
+  <g filter="url(#shadow)" transform="rotate(-28 60 60)">
+    <path d="M62 7c19 15 25 35 20 58L49 82C33 65 28 46 38 25 45 16 53 10 62 7Z" fill="url(#body)" stroke="#263746" stroke-width="2"/>
+    <path d="M38 49 14 60l26 11 11-18Z" fill="#264cff" stroke="#17216b" stroke-width="2"/>
+    <path d="M79 41 108 43 86 63 72 56Z" fill="#264cff" stroke="#17216b" stroke-width="2"/>
+    <circle cx="63" cy="36" r="11" fill="#ffad2f" stroke="#6d3a00" stroke-width="3"/>
+    <circle cx="63" cy="36" r="6" fill="#ffe08a" opacity=".75"/>
+    <path d="M50 78 39 104l24-18Z" fill="url(#fire)"/>
+    <path d="M52 80 45 95l13-10Z" fill="#fff7a8" opacity=".9"/>
+    <path d="M52 24h23M46 63h31" stroke="#71e8d0" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+  </g>
+</svg>
