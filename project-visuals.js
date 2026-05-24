@@ -1,5 +1,7 @@
 (() => {
-  const layoutSrc = 'assets/layout.svg?v=layout1';
+  // Direct image path. The previous SVG wrapper produced a blank white box in browsers
+  // because SVGs used as CSS backgrounds cannot reliably load nested external image files.
+  const layoutSrc = 'assets/flood-scene-preview.webp?v=visible-layout-1';
 
   const style = document.createElement('style');
   style.textContent = `
@@ -7,6 +9,7 @@
       background-image: linear-gradient(145deg, rgba(7, 17, 31, 0.04), rgba(7, 17, 31, 0.16)), url("${layoutSrc}") !important;
       background-size: cover !important;
       background-position: center 42% !important;
+      background-repeat: no-repeat !important;
     }
     .project-card.feature::before {
       content: "HD visual highlight · Click Details for full layout" !important;
