@@ -67,9 +67,39 @@
   background: rgba(255, 255, 255, 0.86);
 }
 
+/* Flood Intelligence visual preview.
+   This adds the uploaded flood-scene work below the first project panel text without changing the HTML structure.
+*/
+.project-card.feature::after {
+  content: "";
+  display: block;
+  width: 100%;
+  min-height: 220px;
+  margin-top: 24px;
+  border-radius: 22px;
+  border: 1px solid var(--line);
+  background-image:
+    linear-gradient(to bottom, rgba(7, 17, 31, 0.08), rgba(7, 17, 31, 0.18)),
+    url("assets/flood-scene-preview.webp");
+  background-size: cover;
+  background-position: center;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.08), 0 18px 40px rgba(0,0,0,.18);
+}
+
+[data-theme="light"] .project-card.feature::after {
+  border-color: rgba(7, 17, 31, 0.18);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.42), 0 18px 36px rgba(7,17,31,.12);
+}
+
 @media (max-width: 640px) {
   .avatar-orbit::before {
     width: 148px;
     height: 148px;
+  }
+
+  .project-card.feature::after {
+    min-height: 170px;
+    margin-top: 18px;
+    border-radius: 18px;
   }
 }
