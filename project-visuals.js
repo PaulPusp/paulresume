@@ -1,9 +1,38 @@
 (() => {
+  const layoutSrc = 'assets/layout.svg?v=layout1';
+
+  const style = document.createElement('style');
+  style.textContent = `
+    .project-card.feature::after {
+      background-image: linear-gradient(145deg, rgba(7, 17, 31, 0.04), rgba(7, 17, 31, 0.16)), url("${layoutSrc}") !important;
+      background-size: cover !important;
+      background-position: center 42% !important;
+    }
+    .project-card.feature::before {
+      content: "HD visual highlight · Click Details for full layout" !important;
+    }
+    .modal-card.has-project-image {
+      width: min(1120px, calc(100vw - 32px));
+      max-height: calc(100vh - 40px);
+      overflow: auto;
+    }
+    .modal-project-visual img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.06);
+      box-shadow: 0 18px 45px rgba(0,0,0,.25);
+    }
+  `;
+  document.head.appendChild(style);
+
   const floodVisual = {
     key: 'flood',
-    src: 'assets/flood-scene-preview.webp?v=modal-full-1',
-    alt: '3D flood depth, elevation, canal, cropland, residential land, and building exposure visualization for the Bangladesh flood mapping project',
-    caption: 'Full flood-depth and local exposure visualization. Click the image to open it in a new tab.'
+    src: layoutSrc,
+    alt: '3D flood depth, elevation, canal, cropland, residential land, and building exposure layout visualization for the Bangladesh flood mapping project',
+    caption: 'Full layout visualization. Click the image to open it in a new tab.'
   };
 
   function removeVisual() {
