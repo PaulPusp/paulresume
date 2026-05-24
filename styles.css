@@ -68,26 +68,32 @@
 }
 
 /* Flood Intelligence visual preview.
-   This adds the uploaded flood-scene work below the first project panel text without changing the HTML structure.
+   The committed preview asset is small, so this prevents fake HD stretching.
+   It keeps the work sharp by displaying it as a centered technical preview.
 */
 .project-card.feature::after {
   content: "";
   display: block;
-  width: 100%;
-  min-height: 220px;
-  margin-top: 24px;
+  width: min(100%, 460px);
+  aspect-ratio: 5 / 4;
+  min-height: unset;
+  margin: 24px auto 0;
   border-radius: 22px;
   border: 1px solid var(--line);
   background-image:
-    linear-gradient(to bottom, rgba(7, 17, 31, 0.08), rgba(7, 17, 31, 0.18)),
-    url("assets/flood-scene-preview.webp");
-  background-size: cover;
+    linear-gradient(to bottom, rgba(7, 17, 31, 0.04), rgba(7, 17, 31, 0.10)),
+    url("assets/flood-scene-preview.webp?v=sharp1");
+  background-size: contain;
   background-position: center;
+  background-repeat: no-repeat;
+  background-color: rgba(255, 255, 255, 0.055);
+  filter: contrast(1.08) saturate(1.08);
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.08), 0 18px 40px rgba(0,0,0,.18);
 }
 
 [data-theme="light"] .project-card.feature::after {
   border-color: rgba(7, 17, 31, 0.18);
+  background-color: rgba(255, 255, 255, 0.78);
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.42), 0 18px 36px rgba(7,17,31,.12);
 }
 
@@ -98,7 +104,7 @@
   }
 
   .project-card.feature::after {
-    min-height: 170px;
+    width: min(100%, 380px);
     margin-top: 18px;
     border-radius: 18px;
   }
