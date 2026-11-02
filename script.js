@@ -49,6 +49,10 @@ const translations = {
   }
 };
 
+translations.zh['nav.engagement'] = '交流';
+translations.fr['nav.engagement'] = 'Rencontres';
+translations.bn['nav.engagement'] = 'পেশাগত যোগাযোগ';
+
 const originalText = new Map();
 const originalHTML = new Map();
 let currentLanguage = 'en';
