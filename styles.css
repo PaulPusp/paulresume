@@ -188,3 +188,27 @@
     padding: 24px;
   }
 }
+
+
+/* Research and industry engagement portfolio – photographs kept in one compact sprite. */
+.engagement-section .section-heading>p:last-child{max-width:760px;margin:0 auto;line-height:1.75}
+.engage-group{margin-top:58px}
+.engage-group-title{display:flex;align-items:end;justify-content:space-between;gap:14px 28px;flex-wrap:wrap;margin-bottom:21px;padding-bottom:17px;border-bottom:1px solid var(--line)}
+.engage-group-title h3{margin:0;font-size:clamp(22px,2.6vw,31px);max-width:730px}
+.engage-group-title .tag{margin:0;color:var(--accent-3);white-space:normal}
+.engage-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.engage-card{border:1px solid var(--line);border-radius:22px;background:var(--card);overflow:hidden;box-shadow:0 14px 45px rgba(0,0,0,.12);transition:transform .22s,border-color .22s}
+.engage-card:hover{transform:translateY(-4px);border-color:rgba(80,227,194,.48)}
+.engage-photo{width:100%;aspect-ratio:4/3;background-color:var(--bg-2);background-image:url("assets/engagement-sprite.avif");background-size:400% 300%;background-repeat:no-repeat;border-bottom:1px solid var(--line)}
+.engage-copy{padding:21px 23px 25px}
+.engage-number{display:block;color:var(--accent);font-size:12px;letter-spacing:.11em;font-weight:850;margin-bottom:10px}
+.engage-copy h4{color:var(--text);font-size:18px;line-height:1.33;letter-spacing:-.02em;margin:0 0 10px}
+.engage-copy p{margin:0;font-size:14px;line-height:1.72}
+.engagement-takeaway{margin-top:55px;padding:34px;border:1px solid var(--line);border-radius:25px;background:linear-gradient(125deg,rgba(80,227,194,.12),rgba(112,168,255,.1))}
+.engagement-takeaway .tag{margin-bottom:13px}
+.engagement-takeaway h3{font-size:clamp(24px,3vw,36px);margin-bottom:15px;max-width:920px}
+.engagement-takeaway>p{max-width:940px;margin-bottom:0}
+.engagement-takeaway .engage-disclosure{font-size:12px;line-height:1.6;margin-top:23px;padding-top:14px;border-top:1px solid var(--line)}
+@media(max-width:900px){.engage-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.engage-grid{grid-template-columns:1fr}.engage-group{margin-top:44px}.engage-copy{padding:20px}.engagement-takeaway{padding:24px}.engage-group-title{align-items:start;flex-direction:column;gap:9px}}
+@media print{.engage-grid{grid-template-columns:repeat(2,1fr)}.engage-card,.engagement-takeaway{box-shadow:none;background:#fff;border-color:#d0d5dd;break-inside:avoid}.engage-copy h4,.engagement-takeaway h3{color:#101828}.engage-number{color:#087c69}}
