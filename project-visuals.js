@@ -1,6 +1,18 @@
 (() => {
   const style = document.createElement('style');
   style.textContent = `
+    /* Default to two visible cards until the visitor's IP country is verified. */
+    .education-grid.geo-restricted {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .education-card[hidden] {
+      display: none !important;
+    }
+    @media (max-width: 920px) {
+      .education-grid.geo-restricted {
+        grid-template-columns: 1fr;
+      }
+    }
     .education-card.phd-card {
       position: relative;
       isolation: isolate;
@@ -87,6 +99,41 @@
   `;
   document.head.appendChild(style);
 
+  // GitHub Pages is public: this is a display preference, not access control.
+  // Fail closed: show the PhD card only after an allowed IP country is confirmed.
+  const phdVisibleCountries = new Set(['BD', 'CN']);
+  let showPhd = false;
+
+  async function lookupCountry(url, key) {
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 3500);
+
+    try {
+      const response = await fetch(url, {
+        signal: controller.signal,
+        cache: 'no-store'
+      });
+      if (!response.ok) return null;
+
+      const result = await response.json();
+      const country = result && result[key];
+      return typeof country === 'string' && /^[A-Z]{2}$/.test(country)
+        ? country
+        : null;
+    } catch {
+      // Blocked API, network failure, timeout, or invalid JSON: keep hidden.
+      return null;
+    } finally {
+      window.clearTimeout(timeout);
+    }
+  }
+
+  async function getVisitorCountry() {
+    // Browser-based lookup uses the visitor's public IP, not GPS.
+    return (await lookupCountry('https://get.geojs.io/v1/ip/country.json', 'country'))
+      || (await lookupCountry('https://ipwho.is/', 'country_code'));
+  }
+
   // Education is ordered by current relevance: PhD, master's, bachelor's.
   const educationCopy = {
     en: {
@@ -170,18 +217,31 @@
     const copy = educationCopy[lang] || educationCopy.en;
     const { grid, masters, bachelors, phd } = cards;
 
-    setCardContent(phd, copy.phdTag, copy.phdTitle, copy.phdPlace, copy.phdBody);
+    if (showPhd) {
+      setCardContent(phd, copy.phdTag, copy.phdTitle, copy.phdPlace, copy.phdBody);
+    }
     setCardContent(masters, copy.msTag, copy.msTitle, copy.msPlace, copy.msBody);
 
-    phd.classList.add('phd-card');
+    phd.hidden = !showPhd;
+    phd.classList.toggle('phd-card', showPhd);
     masters.classList.remove('phd-card');
     bachelors.classList.remove('phd-card');
+    grid.classList.toggle('geo-restricted', !showPhd);
 
-    // Keep the present study first after initial load and every language change.
-    grid.append(phd, masters, bachelors);
+    // Language switching must not bypass the visitor-country restriction.
+    if (showPhd) grid.append(phd, masters, bachelors);
+    else grid.append(masters, bachelors, phd);
   }
 
   updateEducationCards();
+  getVisitorCountry().then(country => {
+    showPhd = phdVisibleCountries.has(country);
+    updateEducationCards();
+  }).catch(() => {
+    // Any unresolved lookup keeps the two-card view.
+    showPhd = false;
+    updateEducationCards();
+  });
   document.querySelector('#language-select')?.addEventListener('change', () => {
     window.setTimeout(updateEducationCards, 0);
   });
