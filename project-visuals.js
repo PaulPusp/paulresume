@@ -221,16 +221,29 @@
     else grid.append(masters, bachelors, phd);
   }
 
-  updateEducationCards();
+  // Only the date of this role varies; its title and description never change.
+  function updateScientificOfficerDate() {
+    const date = document.querySelector('[data-experience-date="scientific-officer"]');
+    if (!date) return;
+    date.textContent = showPhd ? 'May 2025 — Present' : 'May 2025 — June 2026';
+  }
+
+  function updateRegionalContent() {
+    updateEducationCards();
+    updateScientificOfficerDate();
+  }
+
+  // Both regional rules share one IP-country lookup, including its failure fallback.
+  updateRegionalContent();
   getVisitorCountry().then(country => {
     showPhd = phdVisibleCountries.has(country);
-    updateEducationCards();
+    updateRegionalContent();
   }).catch(() => {
-    // Any unresolved lookup keeps the two-card view.
+    // Unknown IP country: two degree cards and the June 2026 end date.
     showPhd = false;
-    updateEducationCards();
+    updateRegionalContent();
   });
   document.querySelector('#language-select')?.addEventListener('change', () => {
-    window.setTimeout(updateEducationCards, 0);
+    window.setTimeout(updateRegionalContent, 0);
   });
 })();
