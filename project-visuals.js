@@ -116,10 +116,29 @@
     }
   }
 
+  function reportGeoDiagnosis(geojs, ipwhois, accepted) {
+    // Optional, country-code-only diagnostics: ?geo_debug=1
+    // No visitor IP address is stored or displayed.
+    if (!window.location?.search?.includes('geo_debug=1')) return;
+    const panel = document.createElement('aside');
+    panel.setAttribute('role', 'status');
+    panel.style.cssText = 'position:fixed;bottom:12px;left:12px;z-index:99999;max-width:min(95vw,440px);padding:12px 16px;color:#fff;background:#102437;border:1px solid #50e3c2;border-radius:12px;font:13px/1.6 system-ui,sans-serif;box-shadow:0 8px 28px #0008';
+    panel.textContent = 'Geolocation build: strict-v2 | GeoJS: ' + (geojs || 'unavailable') +
+      ' | ipwho.is: ' + (ipwhois || 'unavailable') +
+      ' | BD/CN access: ' + (accepted ? 'enabled' : 'disabled');
+    document.body.appendChild(panel);
+  }
+
   async function getVisitorCountry() {
-    // Browser-based lookup uses the visitor's public IP, not GPS.
-    return (await lookupCountry('https://get.geojs.io/v1/ip/country.json', 'country'))
-      || (await lookupCountry('https://ipwho.is/', 'country_code'));
+    // Independent IP-country providers must agree before country-only cards or dates display.
+    // This avoids treating an inaccurate single lookup as proof of Bangladesh or China.
+    const [geojs, ipwhois] = await Promise.all([
+      lookupCountry('https://get.geojs.io/v1/ip/country.json', 'country'),
+      lookupCountry('https://ipwho.is/', 'country_code')
+    ]);
+    const accepted = !!geojs && geojs === ipwhois && phdVisibleCountries.has(geojs);
+    reportGeoDiagnosis(geojs, ipwhois, accepted);
+    return accepted ? geojs : null;
   }
 
   // Education is ordered by current relevance: PhD, master's, bachelor's.
