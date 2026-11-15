@@ -104,7 +104,7 @@
       if (!response.ok) return null;
 
       const result = await response.json();
-      const country = result && result[key];
+      const country = typeof key === 'function' ? key(result) : result && result[key];
       return typeof country === 'string' && /^[A-Z]{2}$/.test(country)
         ? country
         : null;
@@ -116,29 +116,43 @@
     }
   }
 
-  function reportGeoDiagnosis(geojs, ipwhois, accepted) {
+  function reportGeoDiagnosis(results, accepted) {
     // Optional, country-code-only diagnostics: ?geo_debug=1
-    // No visitor IP address is stored or displayed.
+    // No IP address or browser fingerprint is stored.
     if (!window.location?.search?.includes('geo_debug=1')) return;
     const panel = document.createElement('aside');
     panel.setAttribute('role', 'status');
-    panel.style.cssText = 'position:fixed;bottom:12px;left:12px;z-index:99999;max-width:min(95vw,440px);padding:12px 16px;color:#fff;background:#102437;border:1px solid #50e3c2;border-radius:12px;font:13px/1.6 system-ui,sans-serif;box-shadow:0 8px 28px #0008';
-    panel.textContent = 'Geolocation build: strict-v2 | GeoJS: ' + (geojs || 'unavailable') +
-      ' | ipwho.is: ' + (ipwhois || 'unavailable') +
+    panel.style.cssText = 'position:fixed;bottom:12px;left:12px;z-index:99999;max-width:min(95vw,480px);padding:12px 16px;color:#fff;background:#102437;border:1px solid #50e3c2;border-radius:12px;font:13px/1.6 system-ui,sans-serif;box-shadow:0 8px 28px #0008';
+    const names = ['GeoJS', 'ipwho.is', 'IPIP', 'IP.SB'];
+    panel.textContent = 'Geolocation build: quorum-v3 | ' +
+      names.map((name, i) => name + ': ' + (results[i] || 'unavailable')).join(' | ') +
       ' | BD/CN access: ' + (accepted ? 'enabled' : 'disabled');
     document.body.appendChild(panel);
   }
 
+  function ipipCountry(result) {
+    const region = result?.data?.location?.[0];
+    const names = { '中国': 'CN', '孟加拉国': 'BD', '孟加拉': 'BD',
+      '美国': 'US', '新加坡': 'SG', '中国香港': 'HK', '香港': 'HK' };
+    return names[region] || region || null;
+  }
+
   async function getVisitorCountry() {
-    // Independent IP-country providers must agree before country-only cards or dates display.
-    // This avoids treating an inaccurate single lookup as proof of Bangladesh or China.
-    const [geojs, ipwhois] = await Promise.all([
+    // At least two independent sources must agree on BD/CN.
+    // Any reported, conflicting country code blocks access.
+    // This tolerates API outages without trusting a single geolocation provider.
+    const countries = await Promise.all([
       lookupCountry('https://get.geojs.io/v1/ip/country.json', 'country'),
-      lookupCountry('https://ipwho.is/', 'country_code')
+      lookupCountry('https://ipwho.is/', 'country_code'),
+      lookupCountry('https://myip.ipip.net/json', ipipCountry),
+      lookupCountry('https://api.ip.sb/geoip', 'country_code')
     ]);
-    const accepted = !!geojs && geojs === ipwhois && phdVisibleCountries.has(geojs);
-    reportGeoDiagnosis(geojs, ipwhois, accepted);
-    return accepted ? geojs : null;
+    const valid = countries.filter(Boolean);
+    const confirmed = valid.length >= 2 &&
+      valid.every(country => country === valid[0]) &&
+      phdVisibleCountries.has(valid[0]);
+    reportGeoDiagnosis(countries, confirmed);
+    return confirmed ? valid[0] : null;
   }
 
   // Education is ordered by current relevance: PhD, master's, bachelor's.
