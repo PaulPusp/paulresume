@@ -1,18 +1,6 @@
 (() => {
   const style = document.createElement('style');
   style.textContent = `
-    /* Default to two visible cards until the visitor's IP country is verified. */
-    .education-grid.geo-restricted {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-    .education-card[hidden] {
-      display: none !important;
-    }
-    @media (max-width: 920px) {
-      .education-grid.geo-restricted {
-        grid-template-columns: 1fr;
-      }
-    }
     .education-card.phd-card {
       position: relative;
       isolation: isolate;
